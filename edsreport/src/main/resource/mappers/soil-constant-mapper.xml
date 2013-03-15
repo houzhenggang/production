@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="soilConstant">
+	<!-- 所有站点返回结果集 -->
+	<resultMap type="com.rubik.eds.entity.SoilMonitorConstant" id="soilConstantResults">
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="boxWeight1_10" column="boxWeight1_10"/>
+		<result property="boxWeight1_20" column="boxWeight1_20"/>
+		<result property="boxWeight1_30" column="boxWeight1_30"/>
+		<result property="boxWeight1_40" column="boxWeight1_40"/>
+		<result property="boxWeight1_50" column="boxWeight1_50"/>
+		<result property="boxWeight2_10" column="boxWeight2_10"/>
+		<result property="boxWeight2_20" column="boxWeight2_20"/>
+		<result property="boxWeight2_30" column="boxWeight2_30"/>
+		<result property="boxWeight2_40" column="boxWeight2_40"/>
+		<result property="boxWeight2_50" column="boxWeight2_50"/>
+		<result property="boxWeight3_10" column="boxWeight3_10"/>
+		<result property="boxWeight3_20" column="boxWeight3_20"/>
+		<result property="boxWeight3_30" column="boxWeight3_30"/>
+		<result property="boxWeight3_40" column="boxWeight3_40"/>
+		<result property="boxWeight3_50" column="boxWeight3_50"/>
+		<result property="boxWeight4_10" column="boxWeight4_10"/>
+		<result property="boxWeight4_20" column="boxWeight4_20"/>
+		<result property="boxWeight4_30" column="boxWeight4_30"/>
+		<result property="boxWeight4_40" column="boxWeight4_40"/>
+		<result property="boxWeight4_50" column="boxWeight4_50"/>
+		<result property="fieldCapacity10" column="fieldCapacity10"/>
+		<result property="fieldCapacity20" column="fieldCapacity20"/>
+		<result property="fieldCapacity30" column="fieldCapacity30"/>
+		<result property="fieldCapacity40" column="fieldCapacity40"/>
+		<result property="fieldCapacity50" column="fieldCapacity50"/>
+		<result property="wiltingMoisture10" column="wiltingMoisture10"/>
+		<result property="wiltingMoisture20" column="wiltingMoisture20"/>
+		<result property="wiltingMoisture30" column="wiltingMoisture30"/>
+		<result property="wiltingMoisture40" column="wiltingMoisture40"/>
+		<result property="wiltingMoisture50" column="wiltingMoisture50"/>
+		<result property="soilDensity10" column="soilDensity10"/>
+		<result property="soilDensity20" column="soilDensity20"/>
+		<result property="soilDensity30" column="soilDensity30"/>
+		<result property="soilDensity40" column="soilDensity40"/>
+		<result property="soilDensity50" column="soilDensity50"/>
+		<result property="reportSuffix" column="reportSuffix"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="int">
+		select count(smc.stationId) as totalCount from soil_monitor_constant smc, tb_user_station tua, tb_weather_station tws  
+		where tua.userId = #{userId } and tua.stationId = smc.stationId and tua.stationId = tws.stationId
+	</select>
+	
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="soilConstantResults" parameterType="java.util.Map">
+		select distinct smc.stationId, tws.stationName, smc.boxWeight1_10, smc.boxWeight1_20, smc.boxWeight1_30, 
+		smc.boxWeight1_40, smc.boxWeight1_50, smc.boxWeight2_10, smc.boxWeight2_20, smc.boxWeight2_30, 
+		smc.boxWeight2_40, smc.boxWeight2_50, smc.boxWeight3_10, smc.boxWeight3_20, smc.boxWeight3_30, 
+		smc.boxWeight3_40, smc.boxWeight3_50, smc.boxWeight4_10, smc.boxWeight4_20, smc.boxWeight4_30, 
+		smc.boxWeight4_40, smc.boxWeight4_50, smc.fieldCapacity10, smc.fieldCapacity20, smc.fieldCapacity30, 
+		smc.fieldCapacity40, smc.fieldCapacity50, smc.wiltingMoisture10, smc.wiltingMoisture20, smc.wiltingMoisture30, 
+		smc.wiltingMoisture40, smc.wiltingMoisture50, smc.soilDensity10, smc.soilDensity20, smc.soilDensity30, 
+		smc.soilDensity40, smc.soilDensity50, smc.reportSuffix 
+		from soil_monitor_constant smc, tb_user_station tua, tb_weather_station tws  
+		where tua.stationId = smc.stationId and tua.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tua.userId = #{userId } 
+		</if>
+		order by smc.stationId
+	</select>
+	<select id="findById" parameterType="string" resultMap="soilConstantResults">
+		select stationId, stationName, boxWeight1_10, boxWeight1_20, boxWeight1_30, boxWeight1_40, 
+		boxWeight1_50, boxWeight2_10, boxWeight2_20, boxWeight2_30, boxWeight2_40, boxWeight2_50, 
+		boxWeight3_10, boxWeight3_20, boxWeight3_30, boxWeight3_40, boxWeight3_50, boxWeight4_10, 
+		boxWeight4_20, boxWeight4_30, boxWeight4_40, boxWeight4_50, fieldCapacity10, fieldCapacity20, 
+		fieldCapacity30, fieldCapacity40, fieldCapacity50, wiltingMoisture10, wiltingMoisture20, wiltingMoisture30, 
+		wiltingMoisture40, wiltingMoisture50, soilDensity10, soilDensity20, soilDensity30, soilDensity40, soilDensity50, reportSuffix 
+		from soil_monitor_constant 
+		where stationId=#{stationId }
+	</select>
+	<select id="findSoilConstantByUserId" parameterType="java.util.Map" resultMap="soilConstantResults">
+		select distinct twa.stationId, tws.stationName 
+		from soil_monitor_constant twa, tb_user_station tua, tb_weather_station tws  
+		where tua.stationId = twa.stationId and tua.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tua.userId = #{userId } 
+		</if>
+	</select>
+	<insert id="insert" parameterType="com.rubik.eds.entity.SoilMonitorConstant">
+		insert into soil_monitor_constant(
+			stationId, stationName, boxWeight1_10, boxWeight1_20, boxWeight1_30, boxWeight1_40, 
+			boxWeight1_50, boxWeight2_10, boxWeight2_20, boxWeight2_30, boxWeight2_40, boxWeight2_50, 
+			boxWeight3_10, boxWeight3_20, boxWeight3_30, boxWeight3_40, boxWeight3_50, boxWeight4_10, 
+			boxWeight4_20, boxWeight4_30, boxWeight4_40, boxWeight4_50, fieldCapacity10, fieldCapacity20, 
+			fieldCapacity30, fieldCapacity40, fieldCapacity50, wiltingMoisture10, wiltingMoisture20, wiltingMoisture30, 
+			wiltingMoisture40, wiltingMoisture50, soilDensity10, soilDensity20, soilDensity30, soilDensity40, soilDensity50, reportSuffix 
+		)
+		values(
+			#{stationId}, #{stationName}, #{boxWeight1_10}, #{boxWeight1_20}, #{boxWeight1_30}, 
+			#{boxWeight1_40}, #{boxWeight1_50}, #{boxWeight2_10}, #{boxWeight2_20}, #{boxWeight2_30}, 
+			#{boxWeight2_40}, #{boxWeight2_50}, #{boxWeight3_10}, #{boxWeight3_20}, #{boxWeight3_30}, 
+			#{boxWeight3_40}, #{boxWeight3_50}, #{boxWeight4_10}, #{boxWeight4_20}, #{boxWeight4_30}, 
+			#{boxWeight4_40}, #{boxWeight4_50}, #{fieldCapacity10}, #{fieldCapacity20}, #{fieldCapacity30}, 
+			#{fieldCapacity40}, #{fieldCapacity50}, #{wiltingMoisture10}, #{wiltingMoisture20}, #{wiltingMoisture30}, 
+			#{wiltingMoisture40}, #{wiltingMoisture50}, #{soilDensity10}, #{soilDensity20}, #{soilDensity30}, 
+			#{soilDensity40}, #{soilDensity50}, #{reportSuffix}
+		)
+	</insert>
+	<update id="update" parameterType="com.rubik.eds.entity.SoilMonitorConstant">
+		update soil_monitor_constant set 
+		stationName=#{stationName}, boxWeight1_10=#{boxWeight1_10}, 
+		boxWeight1_20=#{boxWeight1_20}, boxWeight1_30=#{boxWeight1_30}, boxWeight1_40=#{boxWeight1_40}, 
+		boxWeight1_50=#{boxWeight1_50}, boxWeight2_10=#{boxWeight2_10}, boxWeight2_20=#{boxWeight2_20}, 
+		boxWeight2_30=#{boxWeight2_30}, boxWeight2_40=#{boxWeight2_40}, boxWeight2_50=#{boxWeight2_50}, 
+		boxWeight3_10=#{boxWeight3_10}, boxWeight3_20=#{boxWeight3_20}, boxWeight3_30=#{boxWeight3_30}, 
+		boxWeight3_40=#{boxWeight3_40}, boxWeight3_50=#{boxWeight3_50}, boxWeight4_10=#{boxWeight4_10}, 
+		boxWeight4_20=#{boxWeight4_20}, boxWeight4_30=#{boxWeight4_30}, boxWeight4_40=#{boxWeight4_40}, 
+		boxWeight4_50=#{boxWeight4_50}, reportSuffix=#{reportSuffix}, 
+		fieldCapacity10=#{fieldCapacity10}, fieldCapacity20=#{fieldCapacity20}, fieldCapacity30=#{fieldCapacity30}, 
+		fieldCapacity40=#{fieldCapacity40}, fieldCapacity50=#{fieldCapacity50}, 
+		wiltingMoisture10=#{wiltingMoisture10}, wiltingMoisture20=#{wiltingMoisture20}, 
+		wiltingMoisture30=#{wiltingMoisture30}, wiltingMoisture40=#{wiltingMoisture40}, wiltingMoisture50=#{wiltingMoisture50}, 
+		soilDensity10=#{soilDensity10}, soilDensity20=#{soilDensity20}, soilDensity30=#{soilDensity30}, 
+		soilDensity40=#{soilDensity40}, soilDensity50=#{soilDensity50}, reportSuffix=#{reportSuffix} 
+		WHERE stationId = #{stationId}
+	</update>
+	
+	<delete id="deleteById" parameterType="string">
+		delete from soil_monitor_constant where stationId = #{stationId}
+	</delete>
+	
+</mapper>

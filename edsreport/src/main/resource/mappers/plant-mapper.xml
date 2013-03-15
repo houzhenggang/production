@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="plant">
+	<resultMap type="com.rubik.eds.entity.TbPlantSpeciesMonitor" id="plantResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="plantMonitorDate" column="plantMonitorDate"/>
+	</resultMap>
+	
+	<resultMap type="com.rubik.eds.entity.TbPlantSpeciesMonitor" id="plantReport">
+		<result property="operationTime" column="operationTime"/>
+		<result property="plantMonitorDate" column="plantMonitorDate"/>
+		<result property="plantDetails.plantMonitorArea" column="plantMonitorArea"/>
+		<result property="plantDetails.plantName" column="plantName"/>
+	</resultMap>
+	
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="java.util.Map">
+		select count(id) as totalCount from tb_plant_species_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+	</select>
+	
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="plantResults" parameterType="java.util.Map">
+		select tpsw.id, tpsw.userId, tpsw.operationTime, 
+		tpsw.stationId, tpsw.plantMonitorDate, tws.stationName 
+		from tb_plant_species_monitor tpsw, tb_weather_station tws
+		where tpsw.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tpsw.userId = #{userId } 
+		</if>
+		order by tpsw.plantMonitorDate desc
+	</select>
+	
+	<select id="findById" resultMap="plantResults" parameterType="int">
+		select id, userId, operationTime, stationId, stationName, plantMonitorDate 
+		from tb_plant_species_monitor 
+		where id=#{id }
+	</select>
+	
+	<select id="findByDate" resultType="int" parameterType="com.rubik.eds.entity.TbPlantSpeciesMonitor">
+		select count(id) from tb_plant_species_monitor 
+		where plantMonitorDate = #{plantMonitorDate } 
+		and stationId = #{stationId }
+	</select>
+	
+	<select id="findPlantReportData" resultMap="plantReport" parameterType="com.rubik.eds.entity.ReportHeader">
+		select tpsm.operationTime,tpsm.plantMonitorDate,tpd.plantMonitorArea,tpd.plantName 
+		from tb_plant_species_monitor tpsm, tb_plant_details tpd 
+		where tpsm.stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND tpsm.userId = #{currentUserId } 
+		</if>
+		and #{reportStartDate } = tpsm.plantMonitorDate and tpsm.id = tpd.plantSpeciesId 
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbPlantSpeciesMonitor">
+		insert into tb_plant_species_monitor(
+		userId, operationTime, stationId, stationName, plantMonitorDate
+		) 
+		values(
+		#{userId}, #{operationTime}, #{stationId}, #{stationName}, #{plantMonitorDate}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.eds.entity.TbPlantSpeciesMonitor">
+		update tb_plant_species_monitor set 
+		userId=#{userId}, operationTime=#{operationTime}, stationId=#{stationId}, 
+		stationName=#{stationName}, plantMonitorDate=#{plantMonitorDate} 
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from tb_plant_species_monitor where id=#{id }
+	</delete>
+</mapper>

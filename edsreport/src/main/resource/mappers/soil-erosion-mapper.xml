@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="soilErosion">
+	<resultMap type="com.rubik.eds.entity.TbSoilErosionMonitor" id="soilErosionResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="soilMonitorDate" column="soilMonitorDate"/>
+		<result property="innerSoilErosion1" column="innerSoilErosion1"/>
+		<result property="innerSoilErosion2" column="innerSoilErosion2"/>
+		<result property="innerSoilErosion3" column="innerSoilErosion3"/>
+		<result property="innerSoilErosion4" column="innerSoilErosion4"/>
+		<result property="innerSoilErosion5" column="innerSoilErosion5"/>
+		<result property="innerSoilErosion6" column="innerSoilErosion6"/>
+		<result property="innerSoilErosion7" column="innerSoilErosion7"/>
+		<result property="innerSoilErosion8" column="innerSoilErosion8"/>
+		<result property="innerSoilErosion9" column="innerSoilErosion9"/>
+		<result property="innerSoilErosion10" column="innerSoilErosion10"/>
+		<result property="innerSoilErosion11" column="innerSoilErosion11"/>
+		<result property="innerSoilErosion12" column="innerSoilErosion12"/>
+		<result property="innerSoilErosion13" column="innerSoilErosion13"/>
+		<result property="innerSoilErosion14" column="innerSoilErosion14"/>
+		<result property="innerSoilErosion15" column="innerSoilErosion15"/>
+		<result property="innerSoilErosion16" column="innerSoilErosion16"/>
+		<result property="innerSoilErosion17" column="innerSoilErosion17"/>
+		<result property="innerSoilErosion18" column="innerSoilErosion18"/>
+		<result property="innerSoilErosion19" column="innerSoilErosion19"/>
+		<result property="innerSoilErosion20" column="innerSoilErosion20"/>
+		<result property="outSoilErosion1" column="outSoilErosion1"/>
+		<result property="outSoilErosion2" column="outSoilErosion2"/>
+		<result property="outSoilErosion3" column="outSoilErosion3"/>
+		<result property="outSoilErosion4" column="outSoilErosion4"/>
+		<result property="outSoilErosion5" column="outSoilErosion5"/>
+		<result property="outSoilErosion6" column="outSoilErosion6"/>
+		<result property="outSoilErosion7" column="outSoilErosion7"/>
+		<result property="outSoilErosion8" column="outSoilErosion8"/>
+		<result property="outSoilErosion9" column="outSoilErosion9"/>
+		<result property="outSoilErosion10" column="outSoilErosion10"/>
+		<result property="outSoilErosion11" column="outSoilErosion11"/>
+		<result property="outSoilErosion12" column="outSoilErosion12"/>
+		<result property="outSoilErosion13" column="outSoilErosion13"/>
+		<result property="outSoilErosion14" column="outSoilErosion14"/>
+		<result property="outSoilErosion15" column="outSoilErosion15"/>
+		<result property="outSoilErosion16" column="outSoilErosion16"/>
+		<result property="outSoilErosion17" column="outSoilErosion17"/>
+		<result property="outSoilErosion18" column="outSoilErosion18"/>
+		<result property="outSoilErosion19" column="outSoilErosion19"/>
+		<result property="outSoilErosion20" column="outSoilErosion20"/>
+	</resultMap>
+	<resultMap type="com.rubik.eds.entity.TbSoilErosionMonitor" id="soilErosionResult">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="soilMonitorDate" column="soilMonitorDate"/>
+		<result property="innerSoilErosion1" column="innerSoilErosion1"/>
+		<result property="innerSoilErosion2" column="innerSoilErosion2"/>
+		<result property="innerSoilErosion3" column="innerSoilErosion3"/>
+		<result property="innerSoilErosion4" column="innerSoilErosion4"/>
+		<result property="innerSoilErosion5" column="innerSoilErosion5"/>
+		<result property="innerSoilErosion6" column="innerSoilErosion6"/>
+		<result property="innerSoilErosion7" column="innerSoilErosion7"/>
+		<result property="innerSoilErosion8" column="innerSoilErosion8"/>
+		<result property="innerSoilErosion9" column="innerSoilErosion9"/>
+		<result property="innerSoilErosion10" column="innerSoilErosion10"/>
+		<result property="innerSoilErosion11" column="innerSoilErosion11"/>
+		<result property="innerSoilErosion12" column="innerSoilErosion12"/>
+		<result property="innerSoilErosion13" column="innerSoilErosion13"/>
+		<result property="innerSoilErosion14" column="innerSoilErosion14"/>
+		<result property="innerSoilErosion15" column="innerSoilErosion15"/>
+		<result property="innerSoilErosion16" column="innerSoilErosion16"/>
+		<result property="innerSoilErosion17" column="innerSoilErosion17"/>
+		<result property="innerSoilErosion18" column="innerSoilErosion18"/>
+		<result property="innerSoilErosion19" column="innerSoilErosion19"/>
+		<result property="innerSoilErosion20" column="innerSoilErosion20"/>
+		<result property="outSoilErosion1" column="outSoilErosion1"/>
+		<result property="outSoilErosion2" column="outSoilErosion2"/>
+		<result property="outSoilErosion3" column="outSoilErosion3"/>
+		<result property="outSoilErosion4" column="outSoilErosion4"/>
+		<result property="outSoilErosion5" column="outSoilErosion5"/>
+		<result property="outSoilErosion6" column="outSoilErosion6"/>
+		<result property="outSoilErosion7" column="outSoilErosion7"/>
+		<result property="outSoilErosion8" column="outSoilErosion8"/>
+		<result property="outSoilErosion9" column="outSoilErosion9"/>
+		<result property="outSoilErosion10" column="outSoilErosion10"/>
+		<result property="outSoilErosion11" column="outSoilErosion11"/>
+		<result property="outSoilErosion12" column="outSoilErosion12"/>
+		<result property="outSoilErosion13" column="outSoilErosion13"/>
+		<result property="outSoilErosion14" column="outSoilErosion14"/>
+		<result property="outSoilErosion15" column="outSoilErosion15"/>
+		<result property="outSoilErosion16" column="outSoilErosion16"/>
+		<result property="outSoilErosion17" column="outSoilErosion17"/>
+		<result property="outSoilErosion18" column="outSoilErosion18"/>
+		<result property="outSoilErosion19" column="outSoilErosion19"/>
+		<result property="outSoilErosion20" column="outSoilErosion20"/>
+	</resultMap>
+	
+	<resultMap type="com.rubik.eds.entity.TbSoilErosionReport" id="soilErosionReport">
+		<result property="userId" column="userId"/>
+		<result property="stationId" column="stationId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="soilMonitorDate" column="soilMonitorDate"/>
+		<result property="innerSoilErosion" column="innerSoilErosion"/>
+		<result property="outSoilErosion" column="outSoilErosion"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="java.util.Map">
+		select count(id) as totalCount from tb_soil_erosion_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="soilErosionResults" parameterType="java.util.Map">
+		select tsew.id, tsew.userId, tsew.operationTime, tsew.stationId, tws.stationName, tsew.soilMonitorDate, 
+		tsew.innerSoilErosion1, tsew.innerSoilErosion2, tsew.innerSoilErosion3, tsew.innerSoilErosion4, 
+		tsew.innerSoilErosion5, tsew.innerSoilErosion6, tsew.innerSoilErosion7, tsew.innerSoilErosion8, 
+		tsew.innerSoilErosion9, tsew.innerSoilErosion10, tsew.innerSoilErosion11, tsew.innerSoilErosion12, 
+		tsew.innerSoilErosion13, tsew.innerSoilErosion14, tsew.innerSoilErosion15, tsew.innerSoilErosion16, 
+		tsew.innerSoilErosion17, tsew.innerSoilErosion18, tsew.innerSoilErosion19, tsew.innerSoilErosion20, 
+		tsew.outSoilErosion1, tsew.outSoilErosion2, tsew.outSoilErosion3, tsew.outSoilErosion4, 
+		tsew.outSoilErosion5, tsew.outSoilErosion6, tsew.outSoilErosion7, tsew.outSoilErosion8, 
+		tsew.outSoilErosion9, tsew.outSoilErosion10, tsew.outSoilErosion11, tsew.outSoilErosion12, 
+		tsew.outSoilErosion13, tsew.outSoilErosion14, tsew.outSoilErosion15, tsew.outSoilErosion16, 
+		tsew.outSoilErosion17, tsew.outSoilErosion18, tsew.outSoilErosion19, tsew.outSoilErosion20 
+		from tb_soil_erosion_monitor tsew, tb_weather_station tws 
+		where tsew.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tsew.userId = #{userId } 
+		</if>
+		order by tsew.soilMonitorDate desc
+	</select>
+	
+	<select id="findSoilErosionReportData" resultMap="soilErosionReport" parameterType="com.rubik.eds.entity.ReportHeader">
+		SELECT man.stationId,man.userId,man.soilMonitorDate,man.operationTime,man.innerSoilErosion,man.outSoilErosion from (
+		(select 
+			ts1.stationId, ts1.userId, ts1.soilMonitorDate, ts1.operationTime, 
+			(ts1.innerSoilErosion1+ts1.innerSoilErosion2+ts1.innerSoilErosion3+ts1.innerSoilErosion4+
+			ts1.innerSoilErosion5+ts1.innerSoilErosion6+ts1.innerSoilErosion7+ts1.innerSoilErosion8+
+			ts1.innerSoilErosion9+ts1.innerSoilErosion10+ts1.innerSoilErosion11+ts1.innerSoilErosion12+
+			ts1.innerSoilErosion13+ts1.innerSoilErosion14+ts1.innerSoilErosion15+ts1.innerSoilErosion16+
+			ts1.innerSoilErosion17+ts1.innerSoilErosion18+ts1.innerSoilErosion19+ts1.innerSoilErosion20)/20
+			as innerSoilErosion ,
+			(ts1.outSoilErosion1+ts1.outSoilErosion2+ts1.outSoilErosion3+ts1.outSoilErosion4+
+			ts1.outSoilErosion5+ts1.outSoilErosion6+ts1.outSoilErosion7+ts1.outSoilErosion8+
+			ts1.outSoilErosion9+ts1.outSoilErosion10+ts1.outSoilErosion11+ts1.outSoilErosion12+
+			ts1.outSoilErosion13+ts1.outSoilErosion14+ts1.outSoilErosion15+ts1.outSoilErosion16+
+			ts1.outSoilErosion17+ts1.outSoilErosion18+ts1.outSoilErosion19+ts1.outSoilErosion20)/20 
+			as outSoilErosion
+		from tb_soil_erosion_monitor ts1 
+		where 
+		ts1.stationId = #{reportStationId }  
+		<if test="currentUserId != null">
+		    AND ts1.userId = #{currentUserId } 
+		</if>
+		and 
+		#{reportStartDate } = ts1.operationTime
+		<!-- DATE_FORMAT(#{reportStartDate },'%Y年%m月01日') = DATE_FORMAT(ts1.soilMonitorDate,'%Y年%m月01日') -->
+		)
+		UNION
+		(select 
+			ts2.stationId, ts2.userId, ts2.soilMonitorDate,  ts2.operationTime, 
+			(ts2.innerSoilErosion1+ts2.innerSoilErosion2+ts2.innerSoilErosion3+ts2.innerSoilErosion4+
+			ts2.innerSoilErosion5+ts2.innerSoilErosion6+ts2.innerSoilErosion7+ts2.innerSoilErosion8+
+			ts2.innerSoilErosion9+ts2.innerSoilErosion10+ts2.innerSoilErosion11+ts2.innerSoilErosion12+
+			ts2.innerSoilErosion13+ts2.innerSoilErosion14+ts2.innerSoilErosion15+ts2.innerSoilErosion16+
+			ts2.innerSoilErosion17+ts2.innerSoilErosion18+ts2.innerSoilErosion19+ts2.innerSoilErosion20)/20
+			as innerSoilErosion, 
+			(ts2.outSoilErosion1+ts2.outSoilErosion2+ts2.outSoilErosion3+ts2.outSoilErosion4+
+			ts2.outSoilErosion5+ts2.outSoilErosion6+ts2.outSoilErosion7+ts2.outSoilErosion8+
+			ts2.outSoilErosion9+ts2.outSoilErosion10+ts2.outSoilErosion11+ts2.outSoilErosion12+
+			ts2.outSoilErosion13+ts2.outSoilErosion14+ts2.outSoilErosion15+ts2.outSoilErosion16+
+			ts2.outSoilErosion17+ts2.outSoilErosion18+ts2.outSoilErosion19+ts2.outSoilErosion20)/20
+			as outSoilErosion
+		from tb_soil_erosion_monitor ts2 
+		where 
+		ts2.stationId =  #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND ts2.userId = #{currentUserId } 
+		</if>
+		and 
+		<!-- DATE_FORMAT(DATE_ADD(#{reportStartDate },INTERVAL -1 MONTH),'%Y年%m月01日') = DATE_FORMAT(ts2.soilMonitorDate,'%Y年%m月01日') -->
+		DATE_ADD(#{reportStartDate },INTERVAL -1 MONTH) = ts2.operationTime
+		)
+		ORDER BY soilMonitorDate DESC
+		) as man
+	</select>
+	
+	<select id="findById" resultMap="soilErosionResult" parameterType="int">
+		select id, userId, operationTime, stationId, soilMonitorDate, innerSoilErosion1, 
+		innerSoilErosion2, innerSoilErosion3, innerSoilErosion4, innerSoilErosion5, innerSoilErosion6, 
+		innerSoilErosion7, innerSoilErosion8, innerSoilErosion9, innerSoilErosion10, innerSoilErosion11, 
+		innerSoilErosion12, innerSoilErosion13, innerSoilErosion14, innerSoilErosion15, innerSoilErosion16, 
+		innerSoilErosion17, innerSoilErosion18, innerSoilErosion19, innerSoilErosion20, outSoilErosion1, 
+		outSoilErosion2, outSoilErosion3, outSoilErosion4, outSoilErosion5, outSoilErosion6, outSoilErosion7, 
+		outSoilErosion8, outSoilErosion9, outSoilErosion10, outSoilErosion11, outSoilErosion12, 
+		outSoilErosion13, outSoilErosion14, outSoilErosion15, outSoilErosion16, outSoilErosion17, 
+		outSoilErosion18, outSoilErosion19, outSoilErosion20 
+		from tb_soil_erosion_monitor 
+		where id = #{id }
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbSoilErosionMonitor">
+		insert into tb_soil_erosion_monitor(
+		userId, operationTime, stationId, stationName, soilMonitorDate, 
+		innerSoilErosion1, innerSoilErosion2, innerSoilErosion3, innerSoilErosion4, innerSoilErosion5, 
+		innerSoilErosion6, innerSoilErosion7, innerSoilErosion8, innerSoilErosion9, innerSoilErosion10, 
+		innerSoilErosion11, innerSoilErosion12, innerSoilErosion13, innerSoilErosion14, innerSoilErosion15, 
+		innerSoilErosion16, innerSoilErosion17, innerSoilErosion18, innerSoilErosion19, innerSoilErosion20, 
+		outSoilErosion1, outSoilErosion2, outSoilErosion3, outSoilErosion4, outSoilErosion5, outSoilErosion6, 
+		outSoilErosion7, outSoilErosion8, outSoilErosion9, outSoilErosion10, outSoilErosion11, 
+		outSoilErosion12, outSoilErosion13, outSoilErosion14, outSoilErosion15, outSoilErosion16, 
+		outSoilErosion17, outSoilErosion18, outSoilErosion19, outSoilErosion20
+		) 
+		values(
+		#{userId}, #{operationTime}, #{stationId}, #{stationName}, #{soilMonitorDate}, 
+		#{innerSoilErosion1}, #{innerSoilErosion2}, #{innerSoilErosion3}, #{innerSoilErosion4}, 
+		#{innerSoilErosion5}, #{innerSoilErosion6}, #{innerSoilErosion7}, #{innerSoilErosion8}, 
+		#{innerSoilErosion9}, #{innerSoilErosion10}, #{innerSoilErosion11}, #{innerSoilErosion12}, 
+		#{innerSoilErosion13}, #{innerSoilErosion14}, #{innerSoilErosion15}, #{innerSoilErosion16}, 
+		#{innerSoilErosion17}, #{innerSoilErosion18}, #{innerSoilErosion19}, #{innerSoilErosion20}, 
+		#{outSoilErosion1}, #{outSoilErosion2}, #{outSoilErosion3}, #{outSoilErosion4}, 
+		#{outSoilErosion5}, #{outSoilErosion6}, #{outSoilErosion7}, #{outSoilErosion8}, 
+		#{outSoilErosion9}, #{outSoilErosion10}, #{outSoilErosion11}, #{outSoilErosion12}, 
+		#{outSoilErosion13}, #{outSoilErosion14}, #{outSoilErosion15}, #{outSoilErosion16}, 
+		#{outSoilErosion17}, #{outSoilErosion18}, #{outSoilErosion19}, #{outSoilErosion20}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.eds.entity.TbSoilErosionMonitor">
+		update tb_soil_erosion_monitor set 
+		userId=#{userId}, operationTime=#{operationTime}, stationId=#{stationId}, stationName=#{stationName}, 
+		soilMonitorDate=#{soilMonitorDate}, innerSoilErosion1=#{innerSoilErosion1}, 
+		innerSoilErosion2=#{innerSoilErosion2}, innerSoilErosion3=#{innerSoilErosion3}, 
+		innerSoilErosion4=#{innerSoilErosion4}, innerSoilErosion5=#{innerSoilErosion5}, 
+		innerSoilErosion6=#{innerSoilErosion6}, innerSoilErosion7=#{innerSoilErosion7}, 
+		innerSoilErosion8=#{innerSoilErosion8}, innerSoilErosion9=#{innerSoilErosion9}, 
+		innerSoilErosion10=#{innerSoilErosion10}, innerSoilErosion11=#{innerSoilErosion11}, 
+		innerSoilErosion12=#{innerSoilErosion12}, innerSoilErosion13=#{innerSoilErosion13}, 
+		innerSoilErosion14=#{innerSoilErosion14}, innerSoilErosion15=#{innerSoilErosion15}, 
+		innerSoilErosion16=#{innerSoilErosion16}, innerSoilErosion17=#{innerSoilErosion17}, 
+		innerSoilErosion18=#{innerSoilErosion18}, innerSoilErosion19=#{innerSoilErosion19}, 
+		innerSoilErosion20=#{innerSoilErosion20}, outSoilErosion1=#{outSoilErosion1}, 
+		outSoilErosion2=#{outSoilErosion2}, outSoilErosion3=#{outSoilErosion3}, 
+		outSoilErosion4=#{outSoilErosion4}, outSoilErosion5=#{outSoilErosion5}, 
+		outSoilErosion6=#{outSoilErosion6}, outSoilErosion7=#{outSoilErosion7}, 
+		outSoilErosion8=#{outSoilErosion8}, outSoilErosion9=#{outSoilErosion9}, 
+		outSoilErosion10=#{outSoilErosion10}, outSoilErosion11=#{outSoilErosion11}, 
+		outSoilErosion12=#{outSoilErosion12}, outSoilErosion13=#{outSoilErosion13}, 
+		outSoilErosion14=#{outSoilErosion14}, outSoilErosion15=#{outSoilErosion15}, 
+		outSoilErosion16=#{outSoilErosion16}, outSoilErosion17=#{outSoilErosion17}, 
+		outSoilErosion18=#{outSoilErosion18}, outSoilErosion19=#{outSoilErosion19}, 
+		outSoilErosion20=#{outSoilErosion20} 
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from tb_soil_erosion_monitor where id=#{id }
+	</delete>
+	<delete id="deleteByTime" parameterType="com.rubik.eds.entity.TbSoilErosionMonitor">
+		delete from tb_soil_erosion_monitor 
+		where 
+		stationId = #{stationId } and 
+		#{soilMonitorDate } = soilMonitorDate
+	</delete>
+</mapper>

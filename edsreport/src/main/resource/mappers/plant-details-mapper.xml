@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="plantDetails">
+
+    <select id="findAllPlantNames" resultType="string">
+		select distinct plantName from tb_plant_details
+	</select>
+    
+	<select id="findByWhere" resultType="string" parameterType="com.rubik.eds.entity.TbPlantDetails">
+		select plantName from tb_plant_details 
+		where plantSpeciesId=#{plantSpeciesId } and plantMonitorArea=#{plantMonitorArea } 
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbPlantDetails">
+		insert into tb_plant_details(
+		plantSpeciesId, plantMonitorArea, plantName 
+		) values
+		<foreach collection="plantNames" item="item" index="index" separator=",">
+			(#{plantSpeciesId}, #{plantMonitorArea}, #{item})
+		</foreach>
+	</insert>
+	
+	<delete id="deleteByWhere" parameterType="com.rubik.eds.entity.TbPlantDetails">
+		delete from tb_plant_details 
+		where plantSpeciesId=#{plantSpeciesId } 
+		<if test="plantMonitorArea != null">
+		    and plantMonitorArea=#{plantMonitorArea } 
+		</if>
+	</delete>
+</mapper>

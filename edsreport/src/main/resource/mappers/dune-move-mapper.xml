@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dune">
+	<resultMap type="com.rubik.eds.entity.TbDuneMoveMonitor" id="duneResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="duneMoveMonitorDate" column="duneMoveMonitorDate"/>
+		<result property="duneMoveLongtitude" column="duneMoveLongtitude"/>
+		<result property="duneMoveLatitude" column="duneMoveLatitude"/>
+		<result property="duneAltitude" column="duneAltitude"/>
+		<result property="duneHeight" column="duneHeight"/>
+		<result property="duneWindwardSlope" column="duneWindwardSlope"/>
+		<result property="duneHilltop" column="duneHilltop"/>
+		<result property="duneLeewardSlope" column="duneLeewardSlope"/>
+		<result property="duneWindPosition" column="duneWindPosition"/>
+		<result property="hilltopPosition" column="hilltopPosition"/>
+		<result property="leewardPosition" column="leewardPosition"/>
+		<result property="windDirection" column="windDirection"/>
+		<result property="windSpeed" column="windSpeed"/>
+	</resultMap>
+	<resultMap type="com.rubik.eds.entity.TbDuneMoveMonitor" id="duneResult">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="duneMoveMonitorDate" column="duneMoveMonitorDate"/>
+		<result property="duneMoveLongtitude" column="duneMoveLongtitude"/>
+		<result property="duneMoveLatitude" column="duneMoveLatitude"/>
+		<result property="duneAltitude" column="duneAltitude"/>
+		<result property="duneHeight" column="duneHeight"/>
+		<result property="duneWindwardSlope" column="duneWindwardSlope"/>
+		<result property="duneHilltop" column="duneHilltop"/>
+		<result property="duneLeewardSlope" column="duneLeewardSlope"/>
+		<result property="duneWindPosition" column="duneWindPosition"/>
+		<result property="hilltopPosition" column="hilltopPosition"/>
+		<result property="leewardPosition" column="leewardPosition"/>
+		<result property="windDirection" column="windDirection"/>
+		<result property="windSpeed" column="windSpeed"/>
+	</resultMap>
+	
+	<resultMap type="com.rubik.eds.entity.TbDuneMoveMonitor" id="longtitude">
+		<result property="duneMoveLongtitude" column="duneMoveLongtitude"/>
+	</resultMap>
+	<resultMap type="com.rubik.eds.entity.TbDuneMoveMonitor" id="latitude">
+		<result property="duneMoveLatitude" column="duneMoveLatitude"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="java.util.Map">
+		select count(id) as totalCount from tb_dune_move_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId }
+		</if>
+	</select>
+	<!-- 查询经纬度 -->
+	<select id="getLongtitudes" resultMap="longtitude" parameterType="java.util.Map">
+		select distinct duneMoveLongtitude 
+		from tb_dune_move_monitor 
+		where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+		order by operationTime desc
+	</select>
+	<select id="getLatitudes" resultMap="latitude" parameterType="java.util.Map">
+		select distinct  duneMoveLatitude 
+		from tb_dune_move_monitor 
+		where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+		order by operationTime desc
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="duneResults" parameterType="java.util.Map">
+		select  tdmw.id, tdmw.userId, tdmw.operationTime, tdmw.stationId, tws.stationName, 
+		tdmw.duneMoveMonitorDate,tdmw.duneMoveLongtitude, tdmw.duneMoveLatitude, 
+		tdmw.duneAltitude, tdmw.duneHeight, tdmw.duneWindwardSlope, tdmw.duneHilltop, 
+		tdmw.duneLeewardSlope, tdmw.duneWindPosition, tdmw.hilltopPosition, 
+		tdmw.leewardPosition, tdmw.windDirection, tdmw.windSpeed 
+		from tb_dune_move_monitor tdmw, tb_weather_station tws 
+		where tdmw.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tdmw.userId = #{userId } 
+		</if>
+		order by tdmw.duneMoveMonitorDate desc,tdmw.stationId
+	</select>
+	
+	<select id="findDuneMoveReportData" resultMap="duneResult" parameterType="com.rubik.eds.entity.ReportHeader">
+		select dune.id, dune.userId, dune.operationTime, dune.stationId, dune.duneMoveMonitorDate, 
+		dune.duneMoveLongtitude, dune.duneMoveLatitude, dune.duneAltitude, sum(dune.duneHeight) as duneHeight, 
+		sum(dune.duneWindwardSlope) as duneWindwardSlope, sum(dune.duneHilltop) as duneHilltop, 
+		sum(dune.duneLeewardSlope) as duneLeewardSlope, sum(dune.duneWindPosition) as duneWindPosition,  
+		sum(dune.hilltopPosition) as hilltopPosition, sum(dune.leewardPosition) as leewardPosition, dune.windDirection, 
+		dune.windSpeed  from (
+		(select  id, userId, operationTime, stationId, duneMoveMonitorDate, 
+				duneMoveLongtitude, duneMoveLatitude,duneAltitude, avg(duneHeight) as duneHeight, 
+				avg(duneWindwardSlope) as duneWindwardSlope, avg(duneHilltop) as duneHilltop, 
+				avg(duneLeewardSlope) as duneLeewardSlope, avg(duneWindPosition) as duneWindPosition, 
+				avg(hilltopPosition) as hilltopPosition, avg(leewardPosition) as leewardPosition, windDirection, windSpeed
+		from tb_dune_move_monitor dune1
+		where stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND userId = #{currentUserId } 
+		</if> and 
+		#{reportStartDate } = duneMoveMonitorDate 
+		order by operationTime desc limit 0,1)
+		union
+		(select  id, userId, operationTime, stationId, duneMoveMonitorDate, 
+				duneMoveLongtitude, duneMoveLatitude, duneAltitude, -avg(duneHeight) as duneHeight, 
+				-avg(duneWindwardSlope) as duneWindwardSlope, -avg(duneHilltop) as duneHilltop, 
+				-avg(duneLeewardSlope) as duneLeewardSlope, -avg(duneWindPosition) as duneWindPosition, 
+				-avg(hilltopPosition) as hilltopPosition, -avg(leewardPosition) as leewardPosition, windDirection, windSpeed
+		from tb_dune_move_monitor 
+		where stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND userId = #{currentUserId } 
+		</if> and 
+		DATE_ADD(#{reportStartDate },INTERVAL -1 MONTH) = duneMoveMonitorDate 
+		order by operationTime desc limit 0,1) 
+		) as dune 
+		order by dune.duneMoveMonitorDate desc limit 0,1
+	</select>
+	
+	<select id="findById" resultMap="duneResult" parameterType="int">
+		select id, userId, operationTime, stationId, duneMoveMonitorDate, 
+		duneMoveLongtitude, duneMoveLatitude, duneAltitude, duneHeight, 
+		duneWindwardSlope, duneHilltop, duneLeewardSlope, duneWindPosition, 
+		hilltopPosition, leewardPosition, windDirection, windSpeed 
+		from tb_dune_move_monitor 
+		where id = #{id }
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbDuneMoveMonitor">
+		insert into tb_dune_move_monitor(
+		userId, operationTime, stationId, stationName, duneMoveMonitorDate, 
+		duneMoveLongtitude, duneMoveLatitude, duneAltitude, duneHeight, 
+		duneWindwardSlope, duneHilltop, duneLeewardSlope, duneWindPosition, 
+		hilltopPosition, leewardPosition, windDirection, windSpeed
+		) 
+		values(
+		#{userId}, #{operationTime}, #{stationId}, #{stationName}, #{duneMoveMonitorDate}, 
+		 #{duneMoveLongtitude}, #{duneMoveLongtitude}, #{duneAltitude}, #{duneHeight}, 
+		 #{duneWindwardSlope}, #{duneHilltop}, #{duneLeewardSlope}, #{duneWindPosition}, 
+		 #{hilltopPosition}, #{leewardPosition}, #{windDirection}, #{windSpeed}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.eds.entity.TbDuneMoveMonitor">
+		update tb_dune_move_monitor set 
+		userId=#{userId}, operationTime=#{operationTime}, stationId=#{stationId}, stationName=#{stationName}, 
+		duneMoveMonitorDate=#{duneMoveMonitorDate}, duneMoveLongtitude=#{duneMoveLongtitude}, 
+		duneMoveLatitude=#{duneMoveLatitude},duneAltitude=#{duneAltitude}, duneHeight=#{duneHeight}, 
+		duneWindwardSlope=#{duneWindwardSlope}, duneHilltop=#{duneHilltop}, duneLeewardSlope=#{duneLeewardSlope}, 
+		duneWindPosition=#{duneWindPosition}, hilltopPosition=#{hilltopPosition}, leewardPosition=#{leewardPosition}, 
+		windDirection=#{windDirection}, windSpeed=#{windSpeed} 
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from tb_dune_move_monitor where id=#{id }
+	</delete>
+	
+	<select id="findReportData" resultMap="duneResults" parameterType="com.rubik.eds.entity.ReportHeader">
+	    select  id, userId, operationTime, stationId, stationName, 
+		duneMoveMonitorDate,duneMoveLongtitude, duneMoveLatitude, 
+		duneAltitude, duneHeight, duneWindwardSlope, duneHilltop, 
+		duneLeewardSlope, duneWindPosition, hilltopPosition, 
+		leewardPosition, windDirection, windSpeed 
+		from tb_dune_move_monitor 
+		where stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND userId = #{currentUserId } 
+		</if>
+		and duneMoveMonitorDate = #{reportStartDate } 
+		order by id desc limit 3
+	</select>
+	
+</mapper>

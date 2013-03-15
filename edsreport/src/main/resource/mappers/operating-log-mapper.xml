@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="operatingLog">
+	<!-- 所有站点返回结果集 -->
+	<resultMap type="com.rubik.support.entity.TbGbOperatingLog" id="stationResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="loginName" column="loginName"/>
+		<result property="nickname" column="nickname"/>
+		<result property="happenTime" column="happenTime"/>
+		<result property="module" column="module"/>
+		<result property="comments" column="comments"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="int">
+		select count(id) as totalCount from tb_gb_operating_log
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="stationResults">
+		select id, userId, loginName, nickname, happenTime, module, comments 
+		from tb_gb_operating_log 
+		order by happenTime desc
+	</select>
+	<select id="findById" parameterType="int" resultMap="stationResults">
+		select id, userId, loginName, nickname, happenTime, module, comments 
+		from tb_gb_operating_log 
+		where id=#{id }
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.support.entity.TbGbOperatingLog">
+		insert into tb_gb_operating_log(userId, loginName, nickname, happenTime, module, comments)
+		values(#{userId}, #{loginName}, #{nickname}, #{happenTime}, #{module}, #{comments})
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.support.entity.TbGbOperatingLog">
+		UPDATE tb_gb_operating_log SET 
+		 userId=#{userId}, loginName=#{loginName}, nickname=#{nickname}, 
+		 happenTime=#{happenTime}, module=#{module}, comments=#{comments}  
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="string">
+		delete from tb_gb_operating_log where id = #{id }
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="list">
+		delete from tb_gb_operating_log where id in(
+			<foreach collection="list" item="id" index="index" separator=",">
+				#{id }			    
+			</foreach>
+		)
+	</delete>
+	
+</mapper>

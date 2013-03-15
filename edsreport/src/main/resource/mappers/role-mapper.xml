@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="systemRole">
+	<!-- 所有角色返回结果集 -->
+	<resultMap type="com.rubik.support.entity.TbSystemRole" id="roleResults">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="type" property="type"/>
+		<result column="parentId" property="parentId"/>
+	</resultMap>
+	
+	<select id="findAllRoles" resultMap="roleResults">
+		select id, name, type, parentId from tb_system_role where type = 'option' order by id
+	</select>
+	
+</mapper>

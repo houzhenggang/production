@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="loginLog">
+	<!-- 所有站点返回结果集 -->
+	<resultMap type="com.rubik.support.entity.TbGbLoginLog" id="loginLogResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="loginName" column="loginName"/>
+		<result property="nickname" column="nickname"/>
+		<result property="loginTime" column="loginTime"/>
+		<result property="loginIp" column="loginIp"/>
+		<result property="isSuccess" column="isSuccess"/>
+		<result property="comments" column="comments"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="int">
+		select count(id) as totalCount from tb_gb_login_log
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="loginLogResults">
+		select id, userId, loginName, nickname, loginTime, loginIp, isSuccess, comments 
+		from tb_gb_login_log 
+		order by loginTime desc
+	</select>
+	<select id="findById" parameterType="int" resultMap="loginLogResults">
+		select id, userId, loginName, nickname, loginTime, loginIp, isSuccess, comments 
+		from tb_gb_login_log 
+		where id=#{id }
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.support.entity.TbGbLoginLog">
+		insert into tb_gb_login_log(userId, loginName, nickname, loginTime, loginIp, isSuccess, comments)
+		values(#{userId}, #{loginName}, #{nickname}, #{loginTime}, #{loginIp}, #{isSuccess}, #{comments})
+	</insert>
+	<update id="update" parameterType="com.rubik.support.entity.TbGbLoginLog">
+		UPDATE tb_gb_login_log SET 
+		 userId=#{userId}, loginName=#{loginName}, nickname=#{nickname}, 
+		 loginTime=#{loginTime}, loginIp=#{loginIp}, isSuccess=#{isSuccess}, 
+		 comments=#{comments} 
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="string">
+		delete from tb_gb_login_log where id = #{id }
+	</delete>
+	
+	<delete id="deleteByIds" parameterType="list">
+		delete from tb_gb_login_log where id in(
+			<foreach collection="list" item="id" index="index" separator=",">
+				#{id }			    
+			</foreach>
+		)
+	</delete>
+	
+</mapper>

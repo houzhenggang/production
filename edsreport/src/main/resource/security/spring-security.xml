@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:beans xmlns:p="http://www.springframework.org/schema/beans" 
+xmlns:s="http://www.springframework.org/schema/security" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/security 
+http://www.springframework.org/schema/security/spring-security-3.1.xsd 
+">
+<p:description>Spring security安全配置文件</p:description>
+
+<!-- URL拦截 -->
+<s:http auto-config="true" use-expressions="true">
+	<s:intercept-url pattern="/security/**/*.action*" access="hasRole('A_INIT')"/>
+	
+	<s:form-login login-page="/login.action" default-target-url="/security/homepage.action" 
+		authentication-failure-url="/login.action?error=true"/>
+	<s:logout invalidate-session="true" logout-success-url="/login.action" delete-cookies="JSESSIONID"/>
+	<s:remember-me key="rubik-snow-self"/>
+	<s:session-management invalid-session-url="/">
+		<s:concurrency-control max-sessions="1000" error-if-maximum-exceeded="true"/>
+	</s:session-management>
+	<s:custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+</s:http>
+<!-- 权限认证管理器 -->
+<s:authentication-manager alias="myAuthenticationManager">
+	<s:authentication-provider user-service-ref="userDetailsService">
+		<s:password-encoder hash="md5" />
+		<!-- 
+			<s:user-service>
+				<s:user name="admin" password="21232f297a57a5a743894a0e4a801fc3" authorities="A_ROLE"/>
+			</s:user-service>
+		 <s:jdbc-user-service data-source-ref=""/>
+		 -->
+	</s:authentication-provider>
+</s:authentication-manager>
+<!-- 项目实现的用户查询服务 -->
+<p:bean id="userDetailsService" class="com.rubik.support.security.service.UserDetailsServiceImpl" />
+
+<!-- 重新定义的myFilter,使用myFilter提供的url-授权关系定义--> 
+<p:bean id="myFilter" class="com.rubik.support.security.filter.MySecurityFilter">
+	<!-- 用户拥有的权限 -->
+	<p:property name="authenticationManager" ref="myAuthenticationManager"/>
+	<!-- 用户是否拥有访问资源的权限 -->
+	<p:property name="accessDecisionManager" ref="myAccessDecisionManager" />
+	<!-- 资源与权限的对应关系 -->
+	<p:property name="securityMetadataSource" ref="mySecurityMetadataSource"></p:property>
+</p:bean>
+
+<!-- 用户是否拥有访问资源的权限 -->
+<p:bean id="myAccessDecisionManager" class="com.rubik.support.security.service.MyAccessDecisionManager"/>
+
+<!-- ResourceAuthorityUrl工厂,使用mySecurityMetadataSource提供的URL-授权关系. -->
+<p:bean id="mySecurityMetadataSource" class="com.rubik.support.security.service.MySecurityMetadataSource">
+	<p:constructor-arg name="resourceDao" ref="resourceDao" />
+</p:bean>
+
+<!-- 项目实现的URL-授权查询服务  -->
+<p:bean id="resourceDao" class="com.rubik.support.dao.TbSystemResourceDao" />
+
+<!-- 授权判断配置, 将授权名称的默认前缀由ROLE_改为A_. -->
+<p:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+	<p:property name="decisionVoters">
+		<p:list>
+			<p:bean class="org.springframework.security.access.vote.RoleVoter">
+				<p:property name="rolePrefix" value="A_" />
+			</p:bean>
+			<p:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+		</p:list>
+	</p:property>
+</p:bean>
+</p:beans>

@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+/*
+ * Ext JS Library 2.0
+ * Copyright(c) 2006-2007, Ext JS, LLC.
+ * licensing@extjs.com
+ * 
+ * http://extjs.com/license
+ */
+
+/* all fields */
+
+.x-form-field{
+    margin: 0 0 0 0;
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
+}
+
+/* ---- text fields ---- */
+.x-form-text, textarea.x-form-field{
+    padding: 1px 3px;
+    border: 1px solid #B5B8C8;
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
+}
+.x-form-text {
+    height:22px;
+    width:200px;
+    line-height:18px;
+    vertical-align:middle;
+}
+.tip-red {
+	font:bold 12px tahoma, arial, helvetica, sans-serif;
+	color:red;
+	padding: 5px;
+    line-height:18px;
+    vertical-align:middle;
+}
+.x-fieldset {
+    border:1px solid #B5B8C8;
+    padding:10px;
+    margin-bottom:10px;
+}
+.x-fieldset legend {
+    font:bold 12px tahoma, arial, helvetica, sans-serif;
+    color:#15428b;
+}
+.cn_fontleft {
+	text-align: left;
+	height: 30px;
+}
+
+.cn_fontright {
+	text-align: right;
+	height: 30px;
+}

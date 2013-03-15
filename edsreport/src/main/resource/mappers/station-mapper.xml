@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="station">
+	<!-- 所有站点返回结果集 -->
+	<resultMap type="com.rubik.eds.entity.TbWeatherStation" id="stationResults">
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="stationTele" column="stationTele"/>
+		<result property="stationArea" column="stationArea"/>
+		<result property="remarks" column="remarks"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="int">
+		select count(stationId) as totalCount from tb_weather_station
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="stationResults">
+		select stationId, stationName, stationTele, stationArea, remarks 
+		from tb_weather_station 
+		order by stationId
+	</select>
+	<select id="findById" parameterType="string" resultMap="stationResults">
+		select stationId, stationName, stationTele, stationArea, remarks 
+		from tb_weather_station 
+		where stationId=#{stationId }
+	</select>
+	<select id="findStationByUserId" parameterType="java.util.Map" resultMap="stationResults">
+		select distinct twa.stationId, twa.stationName, twa.stationTele, twa.stationArea,remarks
+		from tb_weather_station twa, tb_user_station tua 
+		where tua.stationId = twa.stationId 
+		<if test="userId != null">
+		    AND tua.userId = #{userId } 
+		</if>
+	</select>
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbWeatherStation">
+		insert into tb_weather_station(stationId, stationName, stationTele, stationArea, remarks)
+		values(#{stationId}, #{stationName}, #{stationTele}, #{stationArea}, #{remarks})
+	</insert>
+	<update id="update" parameterType="com.rubik.eds.entity.TbWeatherStation">
+		UPDATE tb_weather_station SET 
+		stationId=#{stationId}, stationName=#{stationName}, stationTele=#{stationTele}, 
+		stationArea=#{stationArea}, remarks=#{remarks} 
+		WHERE stationId = #{stationId}
+	</update>
+	
+	<delete id="deleteById" parameterType="string">
+		delete from tb_weather_station where stationId = #{stationId}
+	</delete>
+	
+</mapper>

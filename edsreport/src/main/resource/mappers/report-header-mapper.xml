@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reportHeader">
+	<resultMap type="com.rubik.eds.entity.ReportHeader" id="reportHeaderResults">
+	    <!-- 
+		<result property="id" column="id"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="currentUserId" column="currentUserId"/>
+		<result property="reporterName" column="reporterName"/>
+		<result property="reportDate" column="reportDate"/>
+		 -->
+		 <result property="reporterName" column="reporterName"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="reportHeaderResults" parameterType="java.util.Map">
+		select distinct reporterName 
+		from tb_report_header
+		where 1=1 
+		<if test="userId != null">
+		    AND currentUserId = #{userId } 
+		</if>
+		order by operationTime desc
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.ReportHeader">
+		insert into tb_report_header(
+		operationTime,currentUserId, reporterName, reportDate
+		) 
+		values(
+		now(),#{currentUserId}, #{reporterName}, #{reportDate}
+		)
+	</insert>
+</mapper>

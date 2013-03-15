@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:beans xmlns:p="http://www.springframework.org/schema/beans" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:tx="http://www.springframework.org/schema/tx" 
+xmlns:aop="http://www.springframework.org/schema/aop" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+<!-- 配置文件描述 -->
+<p:description>SpringContext</p:description>
+
+<!-- 配置环境变量 -->
+<p:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<p:property name="locations" value="classpath*:/application.properties"/>
+</p:bean>
+
+<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
+<context:component-scan base-package="com.rubik"/>
+<!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
+<p:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<!-- Connection Info -->
+	<p:property name="driverClassName" value="${jdbc.driver}" />
+	<p:property name="url" value="${jdbc.url}" />
+	<p:property name="username" value="${jdbc.username}" />
+	<p:property name="password" value="${jdbc.password}" />
+
+	<!-- Connection Pooling Info -->
+	<p:property name="initialSize" value="30" />
+	<p:property name="maxActive" value="100" />
+	<p:property name="maxIdle" value="30" />
+	<p:property name="maxWait" value="1000" />
+	<p:property name="poolPreparedStatements" value="true" />
+	<p:property name="defaultAutoCommit" value="true" />
+</p:bean>
+<!-- 配置Mybatis -->
+<p:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<p:property name="configLocation" value="/WEB-INF/classes/ibatis-config.xml"/>
+	<p:property name="dataSource" ref="dataSource"/>
+</p:bean>
+
+<p:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<p:property name="dataSource" ref="dataSource"/>
+</p:bean>
+<!-- 使用annotation定义事务 -->
+<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+<!-- 使用annotation定义AOP -->
+<aop:aspectj-autoproxy proxy-target-class="true" />
+
+<!-- 国际化 -->
+<p:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	<p:property name="basenames">
+		<p:list>
+			<p:value>security.messageResource</p:value>
+		</p:list>
+	</p:property>
+	<p:property name="useCodeAsDefaultMessage" value="true" />
+</p:bean>
+
+</p:beans>

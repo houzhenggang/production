@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC      
+    "-//mybatis.org//DTD Config 3.0//EN"     
+    "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+	<properties>
+		<property name="dialect" value="MYSQL"/>
+	</properties>
+	<typeAliases>
+		<typeAlias type="com.rubik.support.entity.TbSystemUser" alias="user"/>
+		<typeAlias type="com.rubik.support.entity.TbSystemAuthority" alias="authority"/>
+		<typeAlias type="com.rubik.support.entity.TbSystemResource" alias="resource"/>
+	</typeAliases>
+	
+	<plugins>
+		<plugin interceptor="com.rubik.support.interceptor.PaginationInterceptor"/>
+	</plugins>
+	
+	<mappers>
+		<mapper resource="mappers/user-mapper.xml" />
+		<mapper resource="mappers/authority-mapper.xml" />
+		<mapper resource="mappers/resource-mapper.xml" />
+		<mapper resource="mappers/datadict-mapper.xml" />
+		<mapper resource="mappers/role-mapper.xml"/>
+		<mapper resource="mappers/station-mapper.xml"/>
+		<mapper resource="mappers/water-mapper.xml"/>
+		<mapper resource="mappers/dust-mapper.xml"/>
+		<mapper resource="mappers/crop-growth-mapper.xml"/>
+		<mapper resource="mappers/crop-yield-mapper.xml"/>
+		<mapper resource="mappers/grass-mapper.xml"/>
+		<mapper resource="mappers/soil-erosion-mapper.xml"/>
+		<mapper resource="mappers/soil-report-mapper.xml"/>
+		<mapper resource="mappers/dune-move-mapper.xml"/>
+		<mapper resource="mappers/dune-move-report-mapper.xml"/>
+		<mapper resource="mappers/plant-mapper.xml"/>
+		<mapper resource="mappers/plant-details-mapper.xml"/>
+		<mapper resource="mappers/soil-constant-mapper.xml"/>
+		<mapper resource="mappers/soil-analysis-mapper.xml"/>
+		<mapper resource="mappers/report-header-mapper.xml"/>
+		<mapper resource="mappers/login-log-mapper.xml"/>
+		<mapper resource="mappers/operating-log-mapper.xml"/>
+		<mapper resource="mappers/ftp-share_local-mapper.xml"/>
+	</mappers>
+	
+</configuration>

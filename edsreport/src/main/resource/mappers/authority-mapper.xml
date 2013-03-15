@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="authority">
+	<resultMap type="authority" id="authorityResult">
+		<result column="authority" property="authority"/>
+	</resultMap>
+	
+	<select id="getAuthorityByUser" parameterType="user" resultMap="authorityResult">
+		select a.authority from tb_system_authority a, tb_system_user u, tb_user_role r , 
+		tb_role_authority ra where r.user_id = u.id and r.role_id = ra.role_id 
+		and ra.authority_id = a.id and u.id = #{id}
+	</select>
+	
+</mapper>

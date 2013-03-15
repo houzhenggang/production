@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="soilAnalysis">
+	<resultMap type="com.rubik.eds.entity.TbSoilAnalysisMonitor" id="soilAnalysisResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="soilAnalysisDate" column="soilAnalysisDate"/>
+		<result property="drySoilHeight" column="drySoilHeight"/>
+		<result property="wetSoilboxWeight1_10" column="wetSoilboxWeight1_10"/>
+		<result property="wetSoilboxWeight1_20" column="wetSoilboxWeight1_20"/>
+		<result property="wetSoilboxWeight1_30" column="wetSoilboxWeight1_30"/>
+		<result property="wetSoilboxWeight1_40" column="wetSoilboxWeight1_40"/>
+		<result property="wetSoilboxWeight1_50" column="wetSoilboxWeight1_50"/>
+		<result property="drySoilboxWeight1_10" column="drySoilboxWeight1_10"/>
+		<result property="drySoilboxWeight1_20" column="drySoilboxWeight1_20"/>
+		<result property="drySoilboxWeight1_30" column="drySoilboxWeight1_30"/>
+		<result property="drySoilboxWeight1_40" column="drySoilboxWeight1_40"/>
+		<result property="drySoilboxWeight1_50" column="drySoilboxWeight1_50"/>
+		<result property="wetSoilboxWeight2_10" column="wetSoilboxWeight2_10"/>
+		<result property="wetSoilboxWeight2_20" column="wetSoilboxWeight2_20"/>
+		<result property="wetSoilboxWeight2_30" column="wetSoilboxWeight2_30"/>
+		<result property="wetSoilboxWeight2_40" column="wetSoilboxWeight2_40"/>
+		<result property="wetSoilboxWeight2_50" column="wetSoilboxWeight2_50"/>
+		<result property="drySoilboxWeight2_10" column="drySoilboxWeight2_10"/>
+		<result property="drySoilboxWeight2_20" column="drySoilboxWeight2_20"/>
+		<result property="drySoilboxWeight2_30" column="drySoilboxWeight2_30"/>
+		<result property="drySoilboxWeight2_40" column="drySoilboxWeight2_40"/>
+		<result property="drySoilboxWeight2_50" column="drySoilboxWeight2_50"/>
+		<result property="wetSoilboxWeight3_10" column="wetSoilboxWeight3_10"/>
+		<result property="wetSoilboxWeight3_20" column="wetSoilboxWeight3_20"/>
+		<result property="wetSoilboxWeight3_30" column="wetSoilboxWeight3_30"/>
+		<result property="wetSoilboxWeight3_40" column="wetSoilboxWeight3_40"/>
+		<result property="wetSoilboxWeight3_50" column="wetSoilboxWeight3_50"/>
+		<result property="drySoilboxWeight3_10" column="drySoilboxWeight3_10"/>
+		<result property="drySoilboxWeight3_20" column="drySoilboxWeight3_20"/>
+		<result property="drySoilboxWeight3_30" column="drySoilboxWeight3_30"/>
+		<result property="drySoilboxWeight3_40" column="drySoilboxWeight3_40"/>
+		<result property="drySoilboxWeight3_50" column="drySoilboxWeight3_50"/>
+		<result property="wetSoilboxWeight4_10" column="wetSoilboxWeight4_10"/>
+		<result property="wetSoilboxWeight4_20" column="wetSoilboxWeight4_20"/>
+		<result property="wetSoilboxWeight4_30" column="wetSoilboxWeight4_30"/>
+		<result property="wetSoilboxWeight4_40" column="wetSoilboxWeight4_40"/>
+		<result property="wetSoilboxWeight4_50" column="wetSoilboxWeight4_50"/>
+		<result property="drySoilboxWeight4_10" column="drySoilboxWeight4_10"/>
+		<result property="drySoilboxWeight4_20" column="drySoilboxWeight4_20"/>
+		<result property="drySoilboxWeight4_30" column="drySoilboxWeight4_30"/>
+		<result property="drySoilboxWeight4_40" column="drySoilboxWeight4_40"/>
+		<result property="drySoilboxWeight4_50" column="drySoilboxWeight4_50"/>
+	</resultMap>
+	<resultMap type="com.rubik.eds.entity.TbSoilAnalysisMonitor" id="soilAnalysisResult">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="soilAnalysisDate" column="soilAnalysisDate"/>
+		<result property="drySoilHeight" column="drySoilHeight"/>
+		<result property="wetSoilboxWeight1_10" column="wetSoilboxWeight1_10"/>
+		<result property="wetSoilboxWeight1_20" column="wetSoilboxWeight1_20"/>
+		<result property="wetSoilboxWeight1_30" column="wetSoilboxWeight1_30"/>
+		<result property="wetSoilboxWeight1_40" column="wetSoilboxWeight1_40"/>
+		<result property="wetSoilboxWeight1_50" column="wetSoilboxWeight1_50"/>
+		<result property="drySoilboxWeight1_10" column="drySoilboxWeight1_10"/>
+		<result property="drySoilboxWeight1_20" column="drySoilboxWeight1_20"/>
+		<result property="drySoilboxWeight1_30" column="drySoilboxWeight1_30"/>
+		<result property="drySoilboxWeight1_40" column="drySoilboxWeight1_40"/>
+		<result property="drySoilboxWeight1_50" column="drySoilboxWeight1_50"/>
+		<result property="wetSoilboxWeight2_10" column="wetSoilboxWeight2_10"/>
+		<result property="wetSoilboxWeight2_20" column="wetSoilboxWeight2_20"/>
+		<result property="wetSoilboxWeight2_30" column="wetSoilboxWeight2_30"/>
+		<result property="wetSoilboxWeight2_40" column="wetSoilboxWeight2_40"/>
+		<result property="wetSoilboxWeight2_50" column="wetSoilboxWeight2_50"/>
+		<result property="drySoilboxWeight2_10" column="drySoilboxWeight2_10"/>
+		<result property="drySoilboxWeight2_20" column="drySoilboxWeight2_20"/>
+		<result property="drySoilboxWeight2_30" column="drySoilboxWeight2_30"/>
+		<result property="drySoilboxWeight2_40" column="drySoilboxWeight2_40"/>
+		<result property="drySoilboxWeight2_50" column="drySoilboxWeight2_50"/>
+		<result property="wetSoilboxWeight3_10" column="wetSoilboxWeight3_10"/>
+		<result property="wetSoilboxWeight3_20" column="wetSoilboxWeight3_20"/>
+		<result property="wetSoilboxWeight3_30" column="wetSoilboxWeight3_30"/>
+		<result property="wetSoilboxWeight3_40" column="wetSoilboxWeight3_40"/>
+		<result property="wetSoilboxWeight3_50" column="wetSoilboxWeight3_50"/>
+		<result property="drySoilboxWeight3_10" column="drySoilboxWeight3_10"/>
+		<result property="drySoilboxWeight3_20" column="drySoilboxWeight3_20"/>
+		<result property="drySoilboxWeight3_30" column="drySoilboxWeight3_30"/>
+		<result property="drySoilboxWeight3_40" column="drySoilboxWeight3_40"/>
+		<result property="drySoilboxWeight3_50" column="drySoilboxWeight3_50"/>
+		<result property="wetSoilboxWeight4_10" column="wetSoilboxWeight4_10"/>
+		<result property="wetSoilboxWeight4_20" column="wetSoilboxWeight4_20"/>
+		<result property="wetSoilboxWeight4_30" column="wetSoilboxWeight4_30"/>
+		<result property="wetSoilboxWeight4_40" column="wetSoilboxWeight4_40"/>
+		<result property="wetSoilboxWeight4_50" column="wetSoilboxWeight4_50"/>
+		<result property="drySoilboxWeight4_10" column="drySoilboxWeight4_10"/>
+		<result property="drySoilboxWeight4_20" column="drySoilboxWeight4_20"/>
+		<result property="drySoilboxWeight4_30" column="drySoilboxWeight4_30"/>
+		<result property="drySoilboxWeight4_40" column="drySoilboxWeight4_40"/>
+		<result property="drySoilboxWeight4_50" column="drySoilboxWeight4_50"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="java.util.Map">
+		select count(id) as totalCount from tb_soil_analysis_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="soilAnalysisResults" parameterType="java.util.Map">
+		select tsaw.id, tsaw.userId, tsaw.operationTime, tsaw.stationId, tsaw.soilAnalysisDate,tsaw.drySoilHeight,
+		tsaw.wetSoilboxWeight1_10, tsaw.wetSoilboxWeight1_20, tsaw.wetSoilboxWeight1_30, tsaw.wetSoilboxWeight1_40, 
+		tsaw.wetSoilboxWeight1_50, tsaw.drySoilboxWeight1_10, tsaw.drySoilboxWeight1_20, tsaw.drySoilboxWeight1_30, 
+		tsaw.drySoilboxWeight1_40, tsaw.drySoilboxWeight1_50, tsaw.wetSoilboxWeight2_10, tsaw.wetSoilboxWeight2_20, 
+		tsaw.wetSoilboxWeight2_30, tsaw.wetSoilboxWeight2_40, tsaw.wetSoilboxWeight2_50, tsaw.drySoilboxWeight2_10, 
+		tsaw.drySoilboxWeight2_20, tsaw.drySoilboxWeight2_30, tsaw.drySoilboxWeight2_40, tsaw.drySoilboxWeight2_50, 
+		tsaw.wetSoilboxWeight3_10, tsaw.wetSoilboxWeight3_20, tsaw.wetSoilboxWeight3_30, tsaw.wetSoilboxWeight3_40, 
+		tsaw.wetSoilboxWeight3_50, tsaw.drySoilboxWeight3_10, tsaw.drySoilboxWeight3_20, tsaw.drySoilboxWeight3_30, 
+		tsaw.drySoilboxWeight3_40, tsaw.drySoilboxWeight3_50, tsaw.wetSoilboxWeight4_10, tsaw.wetSoilboxWeight4_20, 
+		tsaw.wetSoilboxWeight4_30, tsaw.wetSoilboxWeight4_40, tsaw.wetSoilboxWeight4_50, tsaw.drySoilboxWeight4_10, 
+		tsaw.drySoilboxWeight4_20, tsaw.drySoilboxWeight4_30, tsaw.drySoilboxWeight4_40, tsaw.drySoilboxWeight4_50, tws.stationName 
+		from tb_soil_analysis_monitor tsaw, tb_weather_station tws
+		where tsaw.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tsaw.userId = #{userId } 
+		</if>
+		order by tsaw.operationTime desc
+	</select>
+	
+	<select id="findById" resultMap="soilAnalysisResult" parameterType="int">
+		select id, userId, operationTime, stationId, soilAnalysisDate, wetSoilboxWeight1_10, wetSoilboxWeight1_20, drySoilHeight,
+			wetSoilboxWeight1_30, wetSoilboxWeight1_40, wetSoilboxWeight1_50, drySoilboxWeight1_10, drySoilboxWeight1_20, 
+			drySoilboxWeight1_30, drySoilboxWeight1_40, drySoilboxWeight1_50, wetSoilboxWeight2_10, wetSoilboxWeight2_20, 
+			wetSoilboxWeight2_30, wetSoilboxWeight2_40, wetSoilboxWeight2_50, drySoilboxWeight2_10, drySoilboxWeight2_20, 
+			drySoilboxWeight2_30, drySoilboxWeight2_40, drySoilboxWeight2_50, wetSoilboxWeight3_10, wetSoilboxWeight3_20, 
+			wetSoilboxWeight3_30, wetSoilboxWeight3_40, wetSoilboxWeight3_50, drySoilboxWeight3_10, drySoilboxWeight3_20, 
+			drySoilboxWeight3_30, drySoilboxWeight3_40, drySoilboxWeight3_50, wetSoilboxWeight4_10, wetSoilboxWeight4_20, 
+			wetSoilboxWeight4_30, wetSoilboxWeight4_40, wetSoilboxWeight4_50, drySoilboxWeight4_10, drySoilboxWeight4_20, 
+			drySoilboxWeight4_30, drySoilboxWeight4_40, drySoilboxWeight4_50 
+		from tb_soil_analysis_monitor 
+		where id = #{id }
+	</select>
+	
+	<select id="findReportDataByDate" resultMap="soilAnalysisResult" parameterType="com.rubik.eds.entity.ReportHeader">
+		select id, userId, operationTime, stationId, soilAnalysisDate, wetSoilboxWeight1_10, wetSoilboxWeight1_20, drySoilHeight,
+			wetSoilboxWeight1_30, wetSoilboxWeight1_40, wetSoilboxWeight1_50, drySoilboxWeight1_10, drySoilboxWeight1_20, 
+			drySoilboxWeight1_30, drySoilboxWeight1_40, drySoilboxWeight1_50, wetSoilboxWeight2_10, wetSoilboxWeight2_20, 
+			wetSoilboxWeight2_30, wetSoilboxWeight2_40, wetSoilboxWeight2_50, drySoilboxWeight2_10, drySoilboxWeight2_20, 
+			drySoilboxWeight2_30, drySoilboxWeight2_40, drySoilboxWeight2_50, wetSoilboxWeight3_10, wetSoilboxWeight3_20, 
+			wetSoilboxWeight3_30, wetSoilboxWeight3_40, wetSoilboxWeight3_50, drySoilboxWeight3_10, drySoilboxWeight3_20, 
+			drySoilboxWeight3_30, drySoilboxWeight3_40, drySoilboxWeight3_50, wetSoilboxWeight4_10, wetSoilboxWeight4_20, 
+			wetSoilboxWeight4_30, wetSoilboxWeight4_40, wetSoilboxWeight4_50, drySoilboxWeight4_10, drySoilboxWeight4_20, 
+			drySoilboxWeight4_30, drySoilboxWeight4_40, drySoilboxWeight4_50 
+		from tb_soil_analysis_monitor 
+		where stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND userId = #{currentUserId } 
+		</if>
+		and
+		#{reportStartDate } = soilAnalysisDate
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbSoilAnalysisMonitor">
+		insert into tb_soil_analysis_monitor(
+			userId, operationTime, stationId, stationName, soilAnalysisDate, wetSoilboxWeight1_10, wetSoilboxWeight1_20, 
+			wetSoilboxWeight1_30, wetSoilboxWeight1_40, wetSoilboxWeight1_50, drySoilboxWeight1_10, drySoilboxWeight1_20, 
+			drySoilboxWeight1_30, drySoilboxWeight1_40, drySoilboxWeight1_50, wetSoilboxWeight2_10, wetSoilboxWeight2_20, 
+			wetSoilboxWeight2_30, wetSoilboxWeight2_40, wetSoilboxWeight2_50, drySoilboxWeight2_10, drySoilboxWeight2_20, 
+			drySoilboxWeight2_30, drySoilboxWeight2_40, drySoilboxWeight2_50, wetSoilboxWeight3_10, wetSoilboxWeight3_20, 
+			wetSoilboxWeight3_30, wetSoilboxWeight3_40, wetSoilboxWeight3_50, drySoilboxWeight3_10, drySoilboxWeight3_20, 
+			drySoilboxWeight3_30, drySoilboxWeight3_40, drySoilboxWeight3_50, wetSoilboxWeight4_10, wetSoilboxWeight4_20, 
+			wetSoilboxWeight4_30, wetSoilboxWeight4_40, wetSoilboxWeight4_50, drySoilboxWeight4_10, drySoilboxWeight4_20, 
+			drySoilboxWeight4_30, drySoilboxWeight4_40, drySoilboxWeight4_50, drySoilHeight
+		) 
+		values(
+		 	#{userId}, #{operationTime}, #{stationId}, #{stationName}, #{soilAnalysisDate}, #{wetSoilboxWeight1_10}, 
+		 	#{wetSoilboxWeight1_20}, #{wetSoilboxWeight1_30}, #{wetSoilboxWeight1_40}, #{wetSoilboxWeight1_50}, 
+		 	#{drySoilboxWeight1_10}, #{drySoilboxWeight1_20}, #{drySoilboxWeight1_30}, #{drySoilboxWeight1_40}, 
+		 	#{drySoilboxWeight1_50}, #{wetSoilboxWeight2_10}, #{wetSoilboxWeight2_20}, #{wetSoilboxWeight2_30}, 
+		 	#{wetSoilboxWeight2_40}, #{wetSoilboxWeight2_50}, #{drySoilboxWeight2_10}, #{drySoilboxWeight2_20}, 
+		 	#{drySoilboxWeight2_30}, #{drySoilboxWeight2_40}, #{drySoilboxWeight2_50}, #{wetSoilboxWeight3_10}, 
+		 	#{wetSoilboxWeight3_20}, #{wetSoilboxWeight3_30}, #{wetSoilboxWeight3_40}, #{wetSoilboxWeight3_50}, 
+		 	#{drySoilboxWeight3_10}, #{drySoilboxWeight3_20}, #{drySoilboxWeight3_30}, #{drySoilboxWeight3_40}, 
+		 	#{drySoilboxWeight3_50}, #{wetSoilboxWeight4_10}, #{wetSoilboxWeight4_20}, #{wetSoilboxWeight4_30}, 
+		 	#{wetSoilboxWeight4_40}, #{wetSoilboxWeight4_50}, #{drySoilboxWeight4_10}, #{drySoilboxWeight4_20}, 
+		 	#{drySoilboxWeight4_30}, #{drySoilboxWeight4_40}, #{drySoilboxWeight4_50}, #{drySoilHeight }
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.eds.entity.TbSoilAnalysisMonitor">
+		update tb_soil_analysis_monitor set 
+		userId=#{userId}, operationTime=#{operationTime}, stationId=#{stationId}, stationName=#{stationName}, 
+		soilAnalysisDate=#{soilAnalysisDate}, wetSoilboxWeight1_10=#{wetSoilboxWeight1_10}, 
+		wetSoilboxWeight1_20=#{wetSoilboxWeight1_20}, wetSoilboxWeight1_30=#{wetSoilboxWeight1_30}, 
+		wetSoilboxWeight1_40=#{wetSoilboxWeight1_40}, wetSoilboxWeight1_50=#{wetSoilboxWeight1_50}, 
+		drySoilboxWeight1_10=#{drySoilboxWeight1_10}, drySoilboxWeight1_20=#{drySoilboxWeight1_20}, 
+		drySoilboxWeight1_30=#{drySoilboxWeight1_30}, drySoilboxWeight1_40=#{drySoilboxWeight1_40}, 
+		drySoilboxWeight1_50=#{drySoilboxWeight1_50}, wetSoilboxWeight2_10=#{wetSoilboxWeight2_10}, 
+		wetSoilboxWeight2_20=#{wetSoilboxWeight2_20}, wetSoilboxWeight2_30=#{wetSoilboxWeight2_30}, 
+		wetSoilboxWeight2_40=#{wetSoilboxWeight2_40}, wetSoilboxWeight2_50=#{wetSoilboxWeight2_50}, 
+		drySoilboxWeight2_10=#{drySoilboxWeight2_10}, drySoilboxWeight2_20=#{drySoilboxWeight2_20}, 
+		drySoilboxWeight2_30=#{drySoilboxWeight2_30}, drySoilboxWeight2_40=#{drySoilboxWeight2_40}, 
+		drySoilboxWeight2_50=#{drySoilboxWeight2_50}, wetSoilboxWeight3_10=#{wetSoilboxWeight3_10}, 
+		wetSoilboxWeight3_20=#{wetSoilboxWeight3_20}, wetSoilboxWeight3_30=#{wetSoilboxWeight3_30}, 
+		wetSoilboxWeight3_40=#{wetSoilboxWeight3_40}, wetSoilboxWeight3_50=#{wetSoilboxWeight3_50}, 
+		drySoilboxWeight3_10=#{drySoilboxWeight3_10}, drySoilboxWeight3_20=#{drySoilboxWeight3_20}, 
+		drySoilboxWeight3_30=#{drySoilboxWeight3_30}, drySoilboxWeight3_40=#{drySoilboxWeight3_40}, 
+		drySoilboxWeight3_50=#{drySoilboxWeight3_50}, wetSoilboxWeight4_10=#{wetSoilboxWeight4_10}, 
+		wetSoilboxWeight4_20=#{wetSoilboxWeight4_20}, wetSoilboxWeight4_30=#{wetSoilboxWeight4_30}, 
+		wetSoilboxWeight4_40=#{wetSoilboxWeight4_40}, wetSoilboxWeight4_50=#{wetSoilboxWeight4_50}, 
+		drySoilboxWeight4_10=#{drySoilboxWeight4_10}, drySoilboxWeight4_20=#{drySoilboxWeight4_20}, 
+		drySoilboxWeight4_30=#{drySoilboxWeight4_30}, drySoilboxWeight4_40=#{drySoilboxWeight4_40}, 
+		drySoilboxWeight4_50=#{drySoilboxWeight4_50} ,drySoilHeight=#{drySoilHeight }
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from tb_soil_analysis_monitor where id=#{id }
+	</delete>
+</mapper>

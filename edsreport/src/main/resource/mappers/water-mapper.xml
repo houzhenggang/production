@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="water">
+	<resultMap type="com.rubik.eds.entity.TbWaterMonitor" id="waterResults">
+		<result property="id" column="id"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="userId" column="userId"/>
+		<result property="waterName" column="waterName"/>
+		<result property="fetchLongitude" column="fetchLongitude"/>
+		<result property="fetchLatitude" column="fetchLatitude"/>
+		<result property="turnLongitude" column="turnLongitude"/>
+		<result property="turnLatitude" column="turnLatitude"/>
+		<result property="waterArea" column="waterArea"/>
+		<result property="waterLevel" column="waterLevel"/>
+		<result property="waterOpacity" column="waterOpacity"/>
+		<result property="waterColor" column="waterColor"/>
+		<result property="waterTemperature" column="waterTemperature"/>
+		<result property="waterPh" column="waterPh"/>
+		<result property="waterTotalSalt" column="waterTotalSalt"/>
+		<result property="waterChlorine" column="waterChlorine"/>
+		<result property="waterSulfide" column="waterSulfide"/>
+		<result property="remarks" column="remarks"/>
+		<result property="stationName" column="stationName"/>
+	</resultMap>
+	<resultMap type="com.rubik.eds.entity.TbWaterMonitor" id="waterResult">
+		<result property="id" column="id"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="userId" column="userId"/>
+		<result property="waterName" column="waterName"/>
+		<result property="fetchLongitude" column="fetchLongitude"/>
+		<result property="fetchLatitude" column="fetchLatitude"/>
+		<result property="turnLongitude" column="turnLongitude"/>
+		<result property="turnLatitude" column="turnLatitude"/>
+		<result property="waterArea" column="waterArea"/>
+		<result property="waterLevel" column="waterLevel"/>
+		<result property="waterOpacity" column="waterOpacity"/>
+		<result property="waterColor" column="waterColor"/>
+		<result property="waterTemperature" column="waterTemperature"/>
+		<result property="waterPh" column="waterPh"/>
+		<result property="waterTotalSalt" column="waterTotalSalt"/>
+		<result property="waterChlorine" column="waterChlorine"/>
+		<result property="waterSulfide" column="waterSulfide"/>
+		<result property="remarks" column="remarks"/>
+	</resultMap>
+	<!-- 水体名称列表 -->
+	<resultMap type="com.rubik.eds.entity.TbWaterMonitor" id="waterNames">
+		<result property="waterName" column="waterName"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="java.util.Map">
+		select count(id) as totalCount from tb_water_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId }
+		</if>
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="waterResults" parameterType="java.util.Map">
+		select twm.id, twm.operationTime, twm.stationId, twm.userId, twm.waterName, twm.fetchLongitude, 
+		twm.fetchLatitude, twm.turnLongitude, twm.turnLatitude, twm.waterArea, twm.waterLevel, 
+		twm.waterOpacity, twm.waterColor, twm.waterTemperature, twm.waterPh, twm.waterTotalSalt, 
+		twm.waterChlorine, twm.waterSulfide, twm.remarks, tws.stationName
+		from tb_water_monitor twm, tb_weather_station tws
+		where twm.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND twm.userId = #{userId } 
+		</if>
+		order by twm.operationTime desc
+	</select>
+	<select id="findWaterName" resultMap="waterNames" parameterType="java.util.Map">
+		select distinct waterName from tb_water_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+	</select>
+	
+	<select id="findWaterReportData" resultMap="waterResult" parameterType="com.rubik.eds.entity.ReportHeader">
+		select id, operationTime, stationId, userId, waterName, fetchLongitude, fetchLatitude, 
+		turnLongitude, turnLatitude, waterArea, waterLevel, waterOpacity, waterColor, waterTemperature, 
+		waterPh, waterTotalSalt, waterChlorine, waterSulfide, remarks from tb_water_monitor 
+		where stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND userId = #{currentUserId } 
+		</if>
+		and waterName = #{reportWaterName } and operationTime = #{reportStartDate } 
+		order by operationTime
+	</select>
+	
+	<select id="findById" resultMap="waterResult" parameterType="int">
+		select id, operationTime, stationId, userId, waterName, fetchLongitude, fetchLatitude, 
+		turnLongitude, turnLatitude, waterArea, waterLevel, waterOpacity, waterColor, waterTemperature, 
+		waterPh, waterTotalSalt, waterChlorine, waterSulfide, remarks from tb_water_monitor 
+		where id = #{id }
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbWaterMonitor">
+		insert into tb_water_monitor(
+		operationTime, stationId, userId, waterName, fetchLongitude, fetchLatitude, 
+		turnLongitude, turnLatitude, waterArea, waterLevel, waterOpacity, waterColor, waterTemperature, 
+		waterPh, waterTotalSalt, waterChlorine, waterSulfide, remarks
+		) 
+		values(
+		#{operationTime}, #{stationId}, #{userId}, #{waterName}, #{fetchLongitude}, #{fetchLatitude}, 
+		#{turnLongitude}, #{turnLatitude}, #{waterArea}, #{waterLevel}, #{waterOpacity}, #{waterColor}, 
+		#{waterTemperature}, #{waterPh}, #{waterTotalSalt}, #{waterChlorine}, #{waterSulfide}, #{remarks}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.eds.entity.TbWaterMonitor">
+		update tb_water_monitor set 
+		operationTime=#{operationTime}, stationId=#{stationId}, userId=#{userId}, waterName=#{waterName}, 
+		fetchLongitude=#{fetchLongitude}, fetchLatitude=#{fetchLatitude}, turnLongitude=#{turnLongitude}, 
+		turnLatitude=#{turnLatitude}, waterArea=#{waterArea}, waterLevel=#{waterLevel}, 
+		waterOpacity=#{waterOpacity}, waterColor=#{waterColor}, waterTemperature=#{waterTemperature}, 
+		waterPh=#{waterPh}, waterTotalSalt=#{waterTotalSalt}, waterChlorine=#{waterChlorine}, 
+		waterSulfide=#{waterSulfide}, remarks=#{remarks} 
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from tb_water_monitor where id=#{id }
+	</delete>
+</mapper>

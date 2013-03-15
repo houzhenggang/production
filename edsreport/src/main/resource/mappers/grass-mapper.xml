@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="grass">
+	<resultMap type="com.rubik.eds.entity.TbGrassMonitor" id="grassResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="monitorArea" column="monitorArea"/>
+		<result property="grassName" column="grassName"/>
+		<result property="grassType" column="grassType"/>
+		<result property="backDate" column="backDate"/>
+		<result property="flowerDate" column="flowerDate"/>
+		<result property="yellowDate" column="yellowDate"/>
+		<result property="absoluteHeigth" column="absoluteHeigth"/>
+		<result property="grassHeigth" column="grassHeigth"/>
+		<result property="coverDegree" column="coverDegree"/>
+		<result property="earthBiomass" column="earthBiomass"/>
+		<result property="betterGrassRate" column="betterGrassRate"/>
+		<result property="remarks" column="remarks"/>
+	</resultMap>
+	<resultMap type="com.rubik.eds.entity.TbGrassMonitor" id="grassResult">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="monitorArea" column="monitorArea"/>
+		<result property="grassName" column="grassName"/>
+		<result property="grassType" column="grassType"/>
+		<result property="backDate" column="backDate"/>
+		<result property="flowerDate" column="flowerDate"/>
+		<result property="yellowDate" column="yellowDate"/>
+		<result property="absoluteHeigth" column="absoluteHeigth"/>
+		<result property="grassHeigth" column="grassHeigth"/>
+		<result property="coverDegree" column="coverDegree"/>
+		<result property="earthBiomass" column="earthBiomass"/>
+		<result property="betterGrassRate" column="betterGrassRate"/>
+		<result property="remarks" column="remarks"/>
+	</resultMap>
+	
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="java.util.Map">
+		select count(id) as totalCount from tb_grass_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId }
+		</if>
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="grassResults" parameterType="java.util.Map">
+		select tgw.id, tgw.userId, tgw.operationTime, tgw.stationId, tws.stationName, 
+		tgw.monitorArea, tgw.grassName, tgw.grassType, tgw.backDate, tgw.flowerDate, 
+		tgw.yellowDate, tgw.absoluteHeigth, tgw.grassHeigth, tgw.coverDegree, 
+		tgw.earthBiomass, tgw.betterGrassRate, tgw.remarks 
+		from tb_grass_monitor tgw, tb_weather_station tws 
+		where tgw.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tgw.userId = #{userId } 
+		</if>
+		order by tgw.operationTime desc
+	</select>
+	
+	<select id="findGrassReportData" resultMap="grassResult" parameterType="com.rubik.eds.entity.ReportHeader">
+		select id, userId, operationTime, stationId, monitorArea, 
+		grassName, grassType, backDate, flowerDate, yellowDate, absoluteHeigth, 
+		grassHeigth, coverDegree, earthBiomass, betterGrassRate, remarks 
+		from tb_grass_monitor 
+		where stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND userId = #{currentUserId } 
+		</if>
+		and monitorArea = #{reportMonitorArea} 
+		and operationTime = #{reportStartDate } 
+		order by operationTime
+	</select>
+	
+	<select id="findById" resultMap="grassResult" parameterType="int">
+		select id, userId, operationTime, stationId, monitorArea, 
+		grassName, grassType, backDate, flowerDate, yellowDate, absoluteHeigth, 
+		grassHeigth, coverDegree, earthBiomass, betterGrassRate, remarks 
+		from tb_grass_monitor 
+		where id = #{id }
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbGrassMonitor">
+		insert into tb_grass_monitor(
+		userId, operationTime, stationId, stationName, monitorArea, grassName, 
+		grassType, backDate, flowerDate, yellowDate, absoluteHeigth, grassHeigth, 
+		coverDegree, earthBiomass, betterGrassRate, remarks
+		) 
+		values(
+		#{userId}, #{operationTime}, #{stationId}, #{stationName}, 
+		#{monitorArea}, #{grassName}, #{grassType}, #{backDate}, 
+		#{flowerDate}, #{yellowDate}, #{absoluteHeigth}, #{grassHeigth}, 
+		#{coverDegree}, #{earthBiomass}, #{betterGrassRate}, #{remarks}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.eds.entity.TbGrassMonitor">
+		update tb_grass_monitor set 
+		userId=#{userId}, operationTime=#{operationTime}, stationId=#{stationId}, stationName=#{stationName}, 
+		monitorArea=#{monitorArea}, grassName=#{grassName}, grassType=#{grassType}, backDate=#{backDate}, 
+		flowerDate=#{flowerDate}, yellowDate=#{yellowDate}, absoluteHeigth=#{absoluteHeigth}, 
+		grassHeigth=#{grassHeigth}, coverDegree=#{coverDegree}, earthBiomass=#{earthBiomass}, 
+		betterGrassRate=#{betterGrassRate}, remarks=#{remarks} 
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from tb_grass_monitor where id=#{id }
+	</delete>
+	
+	<select id="findLastedRecord" resultMap="grassResult" parameterType="java.util.Map">
+		select id, userId, operationTime, stationId, monitorArea, 
+		grassName, grassType, backDate, flowerDate, yellowDate, absoluteHeigth, 
+		grassHeigth, coverDegree, earthBiomass, betterGrassRate, remarks 
+		from tb_grass_monitor 
+		where stationId=#{stationId } 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+		order by operationTime desc limit 0,1
+	</select>
+</mapper>

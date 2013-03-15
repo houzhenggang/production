@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cropGrowth">
+	<resultMap type="com.rubik.eds.entity.TbCropGrowthMonitor" id="cropGrowthResults">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="stationName" column="stationName"/>
+		<result property="cropName" column="cropName"/>
+		<result property="sowingDate" column="sowingDate"/>
+		<result property="seedlingDate" column="seedlingDate"/>
+		<result property="trefoilDate" column="trefoilDate"/>
+		<result property="jointingDate" column="jointingDate"/>
+		<result property="headingDate" column="headingDate"/>
+		<result property="tasselingDate" column="tasselingDate"/>
+		<result property="floweringDate" column="floweringDate"/>
+		<result property="silkingDate" column="silkingDate"/>
+		<result property="milkyDate" column="milkyDate"/>
+		<result property="maturityDate" column="maturityDate"/>
+		<result property="growthHeight" column="growthHeight"/>
+		<result property="growthCondition" column="growthCondition"/>
+	</resultMap>
+	<resultMap type="com.rubik.eds.entity.TbCropGrowthMonitor" id="cropGrowthResult">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="stationId" column="stationId"/>
+		<result property="cropName" column="cropName"/>
+		<result property="sowingDate" column="sowingDate"/>
+		<result property="seedlingDate" column="seedlingDate"/>
+		<result property="trefoilDate" column="trefoilDate"/>
+		<result property="jointingDate" column="jointingDate"/>
+		<result property="headingDate" column="headingDate"/>
+		<result property="tasselingDate" column="tasselingDate"/>
+		<result property="floweringDate" column="floweringDate"/>
+		<result property="silkingDate" column="silkingDate"/>
+		<result property="milkyDate" column="milkyDate"/>
+		<result property="maturityDate" column="maturityDate"/>
+		<result property="growthHeight" column="growthHeight"/>
+		<result property="growthCondition" column="growthCondition"/>
+	</resultMap>
+	<!--查询记录总数  -->
+	<select id="getTotalCount" resultType="int"  parameterType="java.util.Map">
+		select count(id) as totalCount from tb_crop_growth_monitor where 1=1 
+		<if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+	</select>
+	<select id="findCropNames" resultType="java.lang.String" parameterType="java.util.Map">
+	    select distinct cropName from tb_crop_growth_monitor where 1=1 
+	    <if test="userId != null">
+		    AND userId = #{userId } 
+		</if>
+		order by operationTime desc
+	</select>
+	<!--查询记录总数  -->
+	<select id="findAll" resultMap="cropGrowthResults" parameterType="java.util.Map">
+		select tcgw.id, tcgw.userId, tcgw.operationTime, tcgw.stationId, tws.stationName, tcgw.cropName, tcgw.sowingDate, 
+		tcgw.seedlingDate, tcgw.trefoilDate, tcgw.jointingDate, tcgw.headingDate, tcgw.tasselingDate, tcgw.floweringDate, 
+		tcgw.silkingDate, tcgw.milkyDate, tcgw.maturityDate, tcgw.growthHeight, tcgw.growthCondition 
+		from tb_crop_growth_monitor tcgw, tb_weather_station tws 
+		where tcgw.stationId = tws.stationId 
+		<if test="userId != null">
+		    AND tcgw.userId = #{userId } 
+		</if>
+		order by tcgw.operationTime desc
+	</select>
+	
+	<select id="findCropGrowthReportData" resultMap="cropGrowthResult" parameterType="com.rubik.eds.entity.ReportHeader">
+		select id, userId, operationTime, stationId, cropName, sowingDate, seedlingDate, trefoilDate, 
+		jointingDate, headingDate, tasselingDate, floweringDate, silkingDate, milkyDate, 
+		maturityDate, growthHeight, growthCondition 
+		from tb_crop_growth_monitor 
+		where stationId = #{reportStationId } 
+		<if test="currentUserId != null">
+		    AND userId = #{currentUserId } 
+		</if>
+		and operationTime = #{reportStartDate } 
+		order by operationTime
+	</select>
+	
+	<select id="findById" resultMap="cropGrowthResult" parameterType="int">
+		select id, userId, operationTime, stationId, cropName, sowingDate, seedlingDate, trefoilDate, 
+		jointingDate, headingDate, tasselingDate, floweringDate, silkingDate, milkyDate, 
+		maturityDate, growthHeight, growthCondition 
+		from tb_crop_growth_monitor 
+		where id = #{id }
+	</select>
+	
+	<insert id="insert" parameterType="com.rubik.eds.entity.TbCropGrowthMonitor">
+		insert into tb_crop_growth_monitor(
+		userId, operationTime, stationId,stationName, cropName, sowingDate, seedlingDate, trefoilDate, 
+		jointingDate, headingDate, tasselingDate, floweringDate, silkingDate, milkyDate, 
+		maturityDate, growthHeight, growthCondition 
+		) 
+		values(
+		#{userId}, #{operationTime}, #{stationId}, #{stationName}, #{cropName}, #{sowingDate}, #{seedlingDate}, 
+		#{trefoilDate}, #{jointingDate}, #{headingDate}, #{tasselingDate}, #{floweringDate}, #{silkingDate}, #{milkyDate}, 
+		#{maturityDate}, #{growthHeight}, #{growthCondition}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.rubik.eds.entity.TbCropGrowthMonitor">
+		update tb_crop_growth_monitor SET 
+		userId=#{userId}, operationTime=#{operationTime}, stationId=#{stationId}, stationName=#{stationName}, 
+		cropName=#{cropName}, sowingDate=#{sowingDate}, seedlingDate=#{seedlingDate}, trefoilDate=#{trefoilDate}, 
+		jointingDate=#{jointingDate}, headingDate=#{headingDate}, tasselingDate=#{tasselingDate}, floweringDate=#{floweringDate}, 
+		silkingDate=#{silkingDate}, milkyDate=#{milkyDate}, maturityDate=#{maturityDate}, growthHeight=#{growthHeight}, 
+		growthCondition=#{growthCondition} where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from tb_crop_growth_monitor where id=#{id }
+	</delete>
+</mapper>

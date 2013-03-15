@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ftpShareLocal">
+	<!-- 返回结果集 -->
+	<resultMap type="com.rubik.eds.entity.FtpShareLocalEntity" id="ftpShareLocalResult">
+	    <result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="operationTime" column="operationTime"/>
+		<result property="ftpAddress" column="ftpAddress"/>
+		<result property="ftpBasePath" column="ftpBasePath"/>
+		<result property="ftpPort" column="ftpPort"/>
+		<result property="ftpUsername" column="ftpUsername"/>
+		<result property="ftpPassword" column="ftpPassword"/>
+		<result property="shareBasePath" column="shareBasePath"/>
+	</resultMap>
+	<!--查询记录  -->
+	<select id="findUnique" resultMap="ftpShareLocalResult">
+		select id, userId, operationTime, ftpAddress, ftpBasePath, ftpPort, ftpUsername, ftpPassword, shareBasePath 
+		from tb_ftp_share_local
+	</select>
+	<insert id="insert" parameterType="com.rubik.eds.entity.FtpShareLocalEntity">
+		insert into tb_ftp_share_local(userId, operationTime, ftpAddress, ftpBasePath, ftpPort, ftpUsername, ftpPassword, shareBasePath) 
+		values(#{userId}, #{operationTime}, #{ftpAddress}, #{ftpBasePath}, #{ftpPort}, #{ftpUsername}, #{ftpPassword}, #{shareBasePath})
+	</insert>
+	<update id="update" parameterType="com.rubik.eds.entity.FtpShareLocalEntity">
+		UPDATE tb_ftp_share_local SET 
+			userId=#{userId}, operationTime=#{operationTime}, ftpAddress=#{ftpAddress}, ftpBasePath=#{ftpBasePath}, 
+			ftpPort=#{ftpPort}, ftpUsername=#{ftpUsername}, ftpPassword=#{ftpPassword}, shareBasePath=#{shareBasePath} 
+		WHERE id = #{id}
+	</update>
+</mapper>
