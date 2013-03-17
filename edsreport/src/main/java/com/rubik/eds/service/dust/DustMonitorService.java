@@ -187,11 +187,15 @@ public class DustMonitorService extends FtpShareLocalFile{
                    sheet.addCell(new Label(1,i, CommonUtils.formatString(dataSource.get(i-4).getDustDryWeight()), wcf3));
                    sheet.addCell(new Label(2,i, CommonUtils.formatString(dataSource.get(i-4).getDustAvgDryWeight()), wcf3));
                    sheet.addCell(new Label(3,i, dataSource.get(i-4).getDustType(), wcf3));
-                   sheet.addCell(new Label(4,i, 
-                		   DateUtils.formatDate(dataSource.get(i-4).getDustStartTime(), DateUtils.YY_MM_DD_HH_MM)
-                		   +" 至 "+
-                		   DateUtils.formatDate(dataSource.get(i-4).getDustEndTime(), DateUtils.YY_MM_DD_HH_MM)
-                		   , wcf3));
+                   if(dataSource.get(i-4).getDustStartTime() != null){
+                	   sheet.addCell(new Label(4,i, 
+                    		   DateUtils.formatDate(dataSource.get(i-4).getDustStartTime(), DateUtils.YY_MM_DD_HH_MM)
+                    		   +" 至 "+
+                    		   DateUtils.formatDate(dataSource.get(i-4).getDustEndTime(), DateUtils.YY_MM_DD_HH_MM)
+                    		   , wcf3));
+                   }else{
+                	   sheet.addCell(new Label(4,i, null , wcf3));
+                   }
                    sheet.addCell(new Label(5,i, dataSource.get(i-4).getRemarks(), wcf3));
 	           }
            }

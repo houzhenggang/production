@@ -179,5 +179,18 @@ $.extend($.fn.validatebox.defaults.rules, {
     		return result;
     	},
     	message:"站号已存在"
+    },
+    changeView : {
+    	validator : function(value, param){
+    		if(value == "无"){
+    			$("input", $("#"+param)).attr("disabled", true);
+    			$("#"+param).css("display", "none");
+    		}else{
+    			$("input", $("#"+param)).attr("disabled", false);
+    			$("#"+param).css("display", "");
+    		}
+	    	return true;
+    	},
+    	message:""
     }
 });

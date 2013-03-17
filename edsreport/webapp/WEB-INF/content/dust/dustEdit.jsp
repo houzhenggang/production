@@ -82,16 +82,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="cn_fontright"><label class="x-form-field">沙尘种类：</label></td>
-					<td>
-						<select name="dustType" class="easyui-combobox" style="width:200px;" data-options="editable:false,required:true">
-							<option value="无" <c:if test="${dust.dustType eq '无' }">selected="selected"</c:if>>无</option>
-							<option value="扬沙" <c:if test="${dust.dustType eq '扬沙' }">selected="selected"</c:if>>扬沙</option>
-							<option value="沙尘暴" <c:if test="${dust.dustType eq '沙尘暴' }">selected="selected"</c:if>>沙尘暴</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
 					<td class="cn_fontright"><label class="x-form-field">降尘干重：</label></td>
 					<td>
 					<input name="dustDryWeight" value="${dust.dustDryWeight }" 
@@ -108,22 +98,37 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="cn_fontright"><label class="x-form-field">开始时间：</label></td>
+					<td class="cn_fontright"><label class="x-form-field">沙尘种类：</label></td>
 					<td>
-					<input name="dustStartTime" id="dustStartTime" class="x-form-text easyui-validatebox Wdate" 
-					value="<fmt:formatDate value='${dust.dustStartTime}' pattern='yyyy-MM-dd HH:mm:ss'/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2,autoUpdateOnChanged:true})">
+						<select name="dustType" class="easyui-combobox" style="width:200px" 
+							data-options="editable:false, required:true, panelHeight:100" validType="changeView('dataPick')">
+							<option value="无" <c:if test="${dust.dustType eq '无' }">selected="selected"</c:if>>无</option>
+							<option value="扬沙" <c:if test="${dust.dustType eq '扬沙' }">selected="selected"</c:if>>扬沙</option>
+							<option value="沙尘暴" <c:if test="${dust.dustType eq '沙尘暴' }">selected="selected"</c:if>>沙尘暴</option>
+						</select>
 					</td>
 				</tr>
-				<tr>
-					<td class="cn_fontright"><label class="x-form-field">结束时间：</label></td>
-					<td>
-					<input name="dustEndTime" id="dustEndTime" 
-					class="x-form-text easyui-validatebox Wdate" 
-					value="<fmt:formatDate value='${dust.dustEndTime}' pattern='yyyy-MM-dd HH:mm:ss'/>"
-					onclick="WdatePicker({minDate:'#F{$dp.$D(\'dustStartTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2,autoUpdateOnChanged:true})">
-					</td>
-				</tr>
+				<tr id="dataPick"><td colspan="2">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="cn_fontright" width="100px"><label class="x-form-field">开始时间：</label></td>
+							<td width="275px">
+							<input name="dustStartTime" id="dustStartTime" class="x-form-text easyui-validatebox Wdate" 
+							value="<fmt:formatDate value='${dust.dustStartTime}' pattern='yyyy-MM-dd HH:mm:ss'/>"
+							onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2,autoUpdateOnChanged:true})">
+							</td>
+						</tr>
+						<tr>
+							<td class="cn_fontright"><label class="x-form-field">结束时间：</label></td>
+							<td>
+							<input name="dustEndTime" id="dustEndTime" 
+							class="x-form-text easyui-validatebox Wdate" 
+							value="<fmt:formatDate value='${dust.dustEndTime}' pattern='yyyy-MM-dd HH:mm:ss'/>"
+							onclick="WdatePicker({minDate:'#F{$dp.$D(\'dustStartTime\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',errDealMode:2,autoUpdateOnChanged:true})">
+							</td>
+						</tr>
+					</table>
+				</td></tr>
 				<tr>
 					<td class="cn_fontright"><label class="x-form-field">备注：</label></td>
 					<td>
